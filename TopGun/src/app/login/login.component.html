@@ -1,0 +1,39 @@
+<!--<p>login works!</p>-->
+
+
+<div class="bg">
+
+    <div class="container login-box">
+      <div class="center-div">
+        <div class="card box-shadow">
+          <div class="card-header">
+  
+            <h4 class="center-v2 my-0 font-weight-normal form-title ">TopGun</h4>
+  
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="form-group input-line">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" [(ngModel)]="loginData.email" name="email">
+  
+              </div>
+              <div class="form-group input-line">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" [(ngModel)]="loginData.password" name="password">
+              </div>
+              <!--<div class="form-group form-check">
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                   <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                  </div>-->
+  
+              <button type="submit" class="center-v2 btn btn-primary" (click)="login()">login</button>
+  
+            </form>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
