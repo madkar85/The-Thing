@@ -1,0 +1,62 @@
+[
+  {
+    "Id": 1,
+    "SocialSecurityNumber": "Marco",
+    "Name": "Marco Villegas",
+    "GivenName": "Marco",
+    "Surname": "Villegas",
+    "Email": "Marco.villegas@live.se",
+    "PhoneNumber": "0706880589",
+    "MobilePhoneNumber": "0706880589",
+    "AgreeMarketing": true,
+    "ReceiveNotificationsByMail": true,
+    "Address": {
+      "attention": null,
+      "careOf": null,
+      "city": "stockholm",
+      "country": "sverige",
+      "street": "Terapivägen 16",
+      "zipCode": "14156"
+    }
+  },
+  {
+    "Id": 2,
+    "SocialSecurityNumber": "Edwin",
+    "Name": "Edwin Villegas",
+    "GivenName": "Edwin",
+    "Surname": "Villegas",
+    "Email": "Edwin.villegas@live.se",
+    "PhoneNumber": "0706880589",
+    "MobilePhoneNumber": "0706880589",
+    "AgreeMarketing": true,
+    "ReceiveNotificationsByMail": true,
+    "Address": {
+      "attention": null,
+      "careOf": null,
+      "city": "stockholm",
+      "country": "sverige",
+      "street": "Terapivägen 16",
+      "zipCode": "14156"
+    }
+  },
+  {
+    "Id": 3,
+    "SocialSecurityNumber": "Erik",
+    "Name": "Erik Svenson",
+    "GivenName": "Erik",
+    "Surname": "Svenson",
+    "Email": "Erik.villegas@live.se",
+    "PhoneNumber": "0706880589",
+    "MobilePhoneNumber": "0706880589",
+    "AgreeMarketing": true,
+    "ReceiveNotificationsByMail": true,
+    "Address": {
+      "attention": null,
+      "careOf": null,
+      "city": "stockholm",
+      "country": "sverige",
+      "street": "Terapivägen 16",
+      "zipCode": "14156"
+    }
+  }
+]
