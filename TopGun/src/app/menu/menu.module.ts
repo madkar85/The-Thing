@@ -7,9 +7,11 @@ import { MenuComponent } from './menu.component';
 
 @NgModule({
   declarations: [MenuComponent],
+  entryComponents: [MenuComponent],
+  exports: [MenuComponent],
   imports: [
     CommonModule,
-    MenuRoutingModule
+    MenuRoutingModule,
   ]
 })
 export class MenuModule { }

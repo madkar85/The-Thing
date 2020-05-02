@@ -26,9 +26,9 @@
             Beräkna skatt 
         </a>
         <div class="dropdown-menu">
-          <a class="dropdown-item" href="/aktiebolag">Aktiebolag</a>
-          <a class="dropdown-item" href="#">Enskild Firma</a>
-          <a class="dropdown-item" href="#">Handelsbolag</a>
+          <a class="dropdown-item" (click)="navigate(pathItem[0])">Aktiebolag</a>
+          <a class="dropdown-item" (click)="navigate(pathItem[1])">Enskild Firma</a>
+          <a class="dropdown-item" (click)="navigate(pathItem[2])">Handelsbolag</a>
         </div>
       </li>
 
@@ -54,5 +54,3 @@
       </form>-->
     </div>
   </nav>
-
-  <router-outlet></router-outlet>

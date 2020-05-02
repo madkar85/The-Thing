@@ -10,11 +10,13 @@ export class MenuComponent implements OnInit {
 
   constructor(private router: Router) { }
 
+  public pathItem: string[] = ['/mainView/aktiebolag', '/mainView/enskildfirma', '/mainView/Banana'];
+
   ngOnInit() {
   }
 
-  goToForm() {
-    this.router.navigate(['/menu']);
+  navigate(path: string) {
+    this.router.navigate([path]);
   }
 
 }
