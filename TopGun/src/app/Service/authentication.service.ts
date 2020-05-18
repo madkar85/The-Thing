@@ -12,10 +12,42 @@ export class AuthenticationService {
 
   constructor(private httpClient: HttpClient) { }
 
+  private tokenName = 'jwt_token';
+
+
+  getToken(): string | null {
+    return localStorage.getItem(this.tokenName);
+  }
+
+  setToken(token: string): void {
+    localStorage.setItem(this.tokenName, token);
+  }
+
+  getTokenExpirationDate(token: string): Date | null {
+    const decoded = this.parseJwt(token);
+
+    if (decoded.exp === undefined) { return null; }
+
+    const date = new Date(0);
+    date.setUTCSeconds(decoded.exp);
+    return date;
+  }
+
+  isTokenExpired(token?: string | null): boolean {
+    if (!token) { token = this.getToken(); }
+    if (!token) { return true; }
+
+    const date = this.getTokenExpirationDate(token);
+    if (date === undefined) { return false; }
+    return !(date!.valueOf() > new Date().valueOf());
+
+  }
+
+
   public getAuthentication(logindata: Login): Observable<AuthToken> {
     console.info(logindata);
     const url = environment.authenticate_url;
-    
+
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: ''
@@ -23,15 +55,19 @@ export class AuthenticationService {
 
     const options = { headers };
 
-    return this.httpClient.post<any>(url, logindata , options);
+    return this.httpClient.post<any>(url, logindata, options);
   }
 
   public parseJwt(token: any) {
-    var base64Url = token.split('.')[1];
-    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(atob(base64).split('').map(c => {
       return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
+
+    /* const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join('')); */
 
     return JSON.parse(jsonPayload);
   }

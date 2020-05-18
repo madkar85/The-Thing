@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ValidationService } from '../service/validation.service';
 import { Login } from '../model/login';
-import { AuthenticationService } from '../service/authentication.service';
+
 import { AuthToken } from '../model/auth-token';
+
+import { AuthenticationService } from '../Service/authentication.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -19,7 +21,7 @@ export class LoginComponent implements OnInit {
     private authenticationService: AuthenticationService) { }
 
   public loginData: Login;
-  public authToken: AuthToken;
+  public token: AuthToken;
 
   ngOnInit() {
 
@@ -35,12 +37,14 @@ export class LoginComponent implements OnInit {
 
     this.authenticationService.getAuthentication(this.loginData).subscribe((res) => {
 
-      this.authToken = res;
+      this.token = res;
+
+      this.authenticationService.setToken(this.token.authToken);
 
       this.router.navigate(['/mainView']);
 
       console.info(res);
-      console.info(this.authToken);
+      console.info(this.token);
 
     });
 
