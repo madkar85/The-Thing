@@ -48,20 +48,7 @@ export class LoginComponent implements OnInit {
 
     });
 
-    /*if (!this.validationService.isValidSwedishSSN(this.loginData.socialSecurityNumber)) {
-      //Du har angivit ett ogiltigt personnummer!
-      return;
-    }else{
-      
-      this.authenticationService.getAuthentication(this.loginData).subscribe((res) => {
-  
-        this.authToken = res;
-        console.info(res);
-        console.info(this.authToken);
 
-      });
-
-    }*/
 
   }
 

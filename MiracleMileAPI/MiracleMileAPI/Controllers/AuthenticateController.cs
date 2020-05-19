@@ -41,17 +41,26 @@ namespace MiracleMileAPI.Controllers
 
  
             var users = getUsers();
-            var user = users.FirstOrDefault(u => u.Email == login.Email);
-            
-            if (user == null)
-            {
-                return new Token() { AuthToken = "", };
-            }
-            else
-            {
+            var user = users.FirstOrDefault(u => u.Email.ToLower() == login.Email.ToLower());
+            if (user != null) 
+            { 
+
+                if (user.Email.ToLower() == login.Email.ToLower() && user.Password == login.Password)
+                {
+
                 var token = TokenData.CreateJwtToken(user);
 
                 return new Token() { AuthToken = token, };
+
+                }
+                else
+                {
+                    return new Token() { AuthToken = "", };
+                }
+            }
+            else
+            {
+                return new Token() { AuthToken = "", };
             }
            
             /*

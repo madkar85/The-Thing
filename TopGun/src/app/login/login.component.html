@@ -12,22 +12,65 @@
   
           </div>
           <div class="card-body">
-            <form>
+            <form #loginForm="ngForm">
               <div class="form-group input-line">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" [(ngModel)]="loginData.email" name="email">
-  
+                <label for="email">Email address</label>
+                <input 
+                pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                required
+                type="email" 
+                [email]="loginData.email !== ''"
+                class="form-control" 
+                id="email" 
+                aria-describedby="emailHelp" 
+                placeholder="Ange din e-postadress"
+                [(ngModel)]="loginData.email" 
+                name="email"
+                #emailControl="ngModel">
+
               </div>
+
+              <span
+              class=" text-danger"
+              *ngIf="emailControl.errors?.pattern && emailControl.touched">
+              Ogiltig e-postadress
+            </span>
+
+            <span 
+            class=" text-danger"
+            *ngIf="emailControl.errors?.required">
+              Email fältet får inte vara tom
+          </span>
+
               <div class="form-group input-line">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" [(ngModel)]="loginData.password" name="password">
+                <label for="exampleInputPassword">Lösenord</label>
+                <input 
+                required
+                type="password" 
+                class="form-control" 
+                id="exampleInputPassword" 
+                placeholder="Ange dit lösenord"
+                [(ngModel)]="loginData.password" 
+                name="password"
+                #passwordControl="ngModel">
               </div>
+
+
+            <span 
+            class=" text-danger"
+             *ngIf="passwordControl.errors?.required">
+              Lösenord fältet får inte vara tom
+          </span>
               <!--<div class="form-group form-check">
                                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
                                   </div>-->
   
-              <button type="submit" class="center-v2 btn btn-primary" (click)="login()">login</button>
+              <button 
+              type="submit" 
+              class="center-v2 btn btn-primary" 
+              [disabled]="loginForm.invalid || !loginForm.dirty"
+              (click)="login()">login</button>
   
             </form>
   

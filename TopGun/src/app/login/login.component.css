@@ -27,6 +27,11 @@
   
   }*/
 
+  .text-danger{
+    color: #ff3636 !important;
+    }
+    
+
   .bg {
     background-color: #ebebeb;
     height: 100vh;
