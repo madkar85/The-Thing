@@ -166,8 +166,6 @@
     box-shadow: none !important;
   }
   
-  
-  
   .link {
     background-color: white;
     color: black;
@@ -182,6 +180,8 @@
 .link:hover {
   border-bottom: 1px solid black;
 }
+  
+    
     
    
   

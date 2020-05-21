@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
 
   public loginData: Login;
   public token: AuthToken;
+  public path = '';
 
   ngOnInit() {
 
@@ -33,7 +34,7 @@ export class LoginComponent implements OnInit {
 
   }
 
-  public login() {
+  public login(): void {
 
     this.authenticationService.getAuthentication(this.loginData).subscribe((res) => {
 
@@ -48,8 +49,10 @@ export class LoginComponent implements OnInit {
 
     });
 
+  }
 
-
+  navigate():void {
+    this.router.navigate(['/register']);
   }
 
 }
