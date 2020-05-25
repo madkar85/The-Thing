@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 import { AuthToken } from '../model/auth-token';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Login } from '../model/login';
+import { GenericHttpService } from './generic-http.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private genericHttpService: GenericHttpService) { }
 
   private tokenName = 'jwt_token';
 
@@ -44,18 +45,13 @@ export class AuthenticationService {
   }
 
 
+
   public getAuthentication(logindata: Login): Observable<AuthToken> {
     console.info(logindata);
+
     const url = environment.authenticate_url;
 
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: ''
-    });
-
-    const options = { headers };
-
-    return this.httpClient.post<any>(url, logindata, options);
+    return this.genericHttpService.post<any>(url, logindata);
   }
 
   public parseJwt(token: any) {
@@ -64,10 +60,7 @@ export class AuthenticationService {
     const jsonPayload = decodeURIComponent(atob(base64).split('').map(c => {
       return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
-
-    /* const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
-      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join('')); */
+    
 
     return JSON.parse(jsonPayload);
   }

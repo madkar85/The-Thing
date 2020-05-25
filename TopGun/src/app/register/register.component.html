@@ -12,15 +12,15 @@
   
           </div>
           <div class="card-body">
-            <form #registerForm="ngForm" >
-              <div class="form-group input-line">
+            <form #registerForm="ngForm" class="padding-b">
+              <div class="form-group">
                 <label for="email">Email address</label>
                 <input 
                 pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                 required
                 type="email" 
                 [email]="registerData.email !== ''"
-                class="form-control" 
+                class="form-control input-line" 
                 id="email" 
                 aria-describedby="emailHelp" 
                 placeholder="Ange din e-postadress"
@@ -28,59 +28,74 @@
                 name="email"
                 #emailControl="ngModel">
 
-              </div>
-
-              <span
-              class=" text-danger"
-              *ngIf="emailControl.errors?.pattern && emailControl.touched">
-              Ogiltig e-postadress
+                <span
+                class=" text-danger help-block"
+                *ngIf="emailControl.errors?.pattern && emailControl.touched">
+                Ogiltig e-postadress
+              </span>
+  
+              <span 
+              class=" text-danger help-block"
+              *ngIf="emailControl.errors?.required && emailControl.touched">
+                Email fältet får inte vara tom
             </span>
 
-            <span 
-            class=" text-danger"
-            *ngIf="emailControl.errors?.required && emailControl.touched">
-              Email fältet får inte vara tom
-          </span>
+              </div>
 
-              <div class="form-group input-line">
+         
+
+              <div class="form-group ">
                 <label for="password1">Lösenord</label>
                 <input 
                 required
                 type="password" 
-                class="form-control" 
+                class="form-control input-line" 
                 id="password1" 
                 placeholder="Ange dit lösenord"
                 [(ngModel)]="registerData.password" 
                 name="password1"
                 #passwordControl1="ngModel">
+
+                <span 
+                class=" text-danger help-block"
+                 *ngIf="passwordControl1.errors?.required && passwordControl1.touched">
+                  Lösenord fältet får inte vara tom
+              </span>
+    
+
               </div>
 
 
-            <span 
-            class=" text-danger"
-             *ngIf="passwordControl1.errors?.required && passwordControl1.touched">
-              Lösenord fältet får inte vara tom
-          </span>
+        
 
-
-          <div class="form-group input-line">
+          <div class="form-group has-error">
             <label for="password2">Repetera lösenord</label>
             <input 
             required
             type="password" 
-            class="form-control" 
+            class="form-control input-line" 
             id="password2" 
             placeholder="Ange dit lösenord"
-            [(ngModel)]="registerData.password" 
+            [(ngModel)]="password2" 
             name="password2"
-            #passwordControl2="ngModel">
+            #passwordControl2="ngModel" (ngModelChange)="checkSame($event)">
+   
+            <span 
+            class=" text-danger help-block"
+             *ngIf="passwordControl2.errors?.required && passwordControl2.touched">
+              Lösenord fältet får inte vara tom
+          </span>
+          
+          <span 
+          class=" text-danger help-block"
+           *ngIf="showErrorMessage === false">
+            Lösenorden är inte lika
+        </span>
+
           </div>
 
-          <span 
-          class=" text-danger"
-           *ngIf="passwordControl2.errors?.required && passwordControl2.touched">
-            Lösenord fältet får inte vara tom
-        </span>
+
+
 
 
               <!--<div class="form-group form-check">
@@ -96,7 +111,7 @@
   
             </form>
 
-            <a class="link" (click)="navigate()">Gå till login</a>
+            <a class="link " (click)="navigate()">Gå till login</a>
   
           </div>
         </div>
