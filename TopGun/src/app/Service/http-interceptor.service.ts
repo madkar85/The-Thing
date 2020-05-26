@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpInterceptor, HttpEvent, HttpHandler, HttpRequest, HttpErrorResponse } from '@angular/common/http';
 import { AuthenticationService } from './authentication.service';
+import { Observable, throwError } from 'rxjs';
+import { retry, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TokenInterceptorService implements HttpInterceptor {
+
+// Intercepts all HTTP requests that are sent and received
+// Adds token to all HTTP requests and handles response errors
+export class HttpInterceptorService implements HttpInterceptor {
 
   constructor(private authenticationService: AuthenticationService) { }
 
@@ -25,9 +29,27 @@ export class TokenInterceptorService implements HttpInterceptor {
     // This is required because HttpRequests are immutable
     const authReq = req.clone({ headers: newHeaders });      // Then we return an Observable that will run the request
     // or pass it to the next interceptor if any
-    return next.handle(authReq);
+    return next.handle(authReq).pipe(
+      retry(1),
+      catchError((error: HttpErrorResponse) => {
+        return throwError(this.handleError(error));
+      })
+    );
 
 
+  }
+
+  handleError(error: any) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // client-side error
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      // server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    window.alert(errorMessage);
+    return errorMessage;
   }
 
 }
