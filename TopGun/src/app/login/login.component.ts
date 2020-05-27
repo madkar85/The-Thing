@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
   public loginData: Login;
   public token: AuthToken;
   public path = '';
+  public showMessage: boolean;
 
   ngOnInit() {
 
@@ -40,18 +41,46 @@ export class LoginComponent implements OnInit {
 
       this.token = res;
 
-      this.authenticationService.setToken(this.token.authToken);
+      if (!this.checkIfTokenEmpty()) {
+        this.authenticationService.setToken(this.token.authToken);
 
-      this.router.navigate(['/mainView']);
+        console.info('-----login-----');
+        console.info(res);
+        console.info(this.token);
 
-      console.info(res);
-      console.info(this.token);
+        this.router.navigate(['/mainView']);
+
+      
+      }
 
     });
 
   }
 
-  navigate():void {
+  public checkIfTokenEmpty(): boolean {
+    if (this.token.authToken === '') {
+      this.message(true);
+      return true;
+     
+    } else {
+      this.message(false);
+      return false;
+    }
+
+  }
+
+  public message(show: boolean) {
+
+    if (show) {
+      this.showMessage = true;
+    } else {
+      this.showMessage = false;
+    }
+
+  }
+
+
+  public navigate(): void {
     this.router.navigate(['/register']);
   }
 
