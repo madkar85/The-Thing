@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MiracleMileAPI.Model
 {
-    public class Response
+    public class ResponseMessage
     {
         public Boolean Error { get; set; }
         public string Code { get; set; }

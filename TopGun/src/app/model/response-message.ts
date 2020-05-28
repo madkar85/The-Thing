@@ -1,4 +1,4 @@
-export class Response {
+export class ResponseMessage {
     error: boolean;
     code: string;
     message: string;

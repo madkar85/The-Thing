@@ -41,7 +41,7 @@ namespace MiracleMileAPI.Controllers
 
  
             var users = getUsers();
-            var user = users.FirstOrDefault(u => u.Email.ToLower() == login.Email.ToLower());
+            var user =   users.FirstOrDefault(u => u.Email.ToLower() == login.Email.ToLower());
             if (user != null) 
             { 
 
