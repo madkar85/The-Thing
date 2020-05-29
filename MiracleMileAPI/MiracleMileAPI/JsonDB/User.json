@@ -6,18 +6,18 @@
     "GivenName": "Marco",
     "Surname": "Villegas",
     "Email": "Marco.villegas@live.se",
-    "password": "test123",
+    "Password": "test123",
     "PhoneNumber": "0706880589",
     "MobilePhoneNumber": "0706880589",
     "AgreeMarketing": true,
     "ReceiveNotificationsByMail": true,
     "Address": {
-      "attention": null,
-      "careOf": null,
-      "city": "stockholm",
-      "country": "sverige",
-      "street": "Terapivägen 16",
-      "zipCode": "14156"
+      "City": "stockholm",
+      "Country": "sverige",
+      "Street": "Terapivï¿½gen 16",
+      "ZipCode": "14156",
+      "Attention": null,
+      "CareOf": null
     }
   },
   {
@@ -27,18 +27,18 @@
     "GivenName": "Edwin",
     "Surname": "Villegas",
     "Email": "Edwin.villegas@live.se",
-    "password": "test123",
+    "Password": "test123",
     "PhoneNumber": "0706880589",
     "MobilePhoneNumber": "0706880589",
     "AgreeMarketing": true,
     "ReceiveNotificationsByMail": true,
     "Address": {
-      "attention": null,
-      "careOf": null,
-      "city": "stockholm",
-      "country": "sverige",
-      "street": "Terapivägen 16",
-      "zipCode": "14156"
+      "City": "stockholm",
+      "Country": "sverige",
+      "Street": "Terapivï¿½gen 16",
+      "ZipCode": "14156",
+      "Attention": null,
+      "CareOf": null
     }
   },
   {
@@ -48,18 +48,17 @@
     "GivenName": "Erik",
     "Surname": "Svenson",
     "Email": "Erik.villegas@live.se",
-    "password": "test123",
+    "Password": "test123",
     "PhoneNumber": "0706880589",
     "MobilePhoneNumber": "0706880589",
     "AgreeMarketing": true,
     "ReceiveNotificationsByMail": true,
     "Address": {
-      "attention": null,
-      "careOf": null,
-      "city": "stockholm",
-      "country": "sverige",
-      "street": "Terapivägen 16",
-      "zipCode": "14156"
+      "City": "stockholm",
+      "Country": "sverige",
+      "Street": "Terapivï¿½gen 16",
+      "ZipCode": "14156",
+      "Attention": null,
+      "CareOf": null
     }
-  }
-]
+  }]

@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MiracleMileAPI.Model;
+using Newtonsoft.Json;
 
 namespace MiracleMileAPI.Controllers
 {
@@ -12,6 +14,16 @@ namespace MiracleMileAPI.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+
+        private readonly IWebHostEnvironment _hostingEnvironment;
+
+ 
+        public UserController(IWebHostEnvironment hostingEnvironment)
+        {
+            _hostingEnvironment = hostingEnvironment;
+           
+        }
+
         // GET: api/User
         [HttpGet]
         public IEnumerable<string> Get()
@@ -30,36 +42,48 @@ namespace MiracleMileAPI.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Post([FromBody] Register register)
         {
-
-
-            var test = register;
-
-            return Ok(test);
-
-            /*try
+            if(register.Email != null && register.Password != null)
             {
-                var test = register;
+                var newId = Guid.NewGuid().GetHashCode();
+                var user = new User
+                {
+                    Id = newId,
+                    Email = register.Email,
+                    Password = register.Password,
+                    AgreeMarketing = true,
+                    ReceiveNotificationsByMail = true
+                };
 
-                return Ok(test);
+                List<User> jsonList = getUsers();
+
+                jsonList.Add(user);
+                //write string to file
+
+                var jsonData = JsonConvert.SerializeObject(jsonList);
+                var contentRootPath = _hostingEnvironment.ContentRootPath;
+                var file = $@"{contentRootPath}/JsonDB/User.json";
+                System.IO.File.WriteAllText(file, jsonData);
+                return Ok(register);
+
             }
-            catch (CreateAddressFromTokenException)
+            else
             {
-                return BadRequest();
-            }
-            catch (UnauthorizedException)
-            {
-                return NoContent();
-            }
-            catch (NotFoundException)
-            {
-                return NotFound();
-            }
-            catch (Exception)
-            {
-                throw;
-            }*/
 
+                return BadRequest(new ResponseMessage{Error = true, Code = "1" , Message = "objektet som tagits emot är tom" });
+            }
+
+            
         }
+
+        private List<User> getUsers()
+        {
+            var contentRootPath = _hostingEnvironment.ContentRootPath;
+            var file = $@"{contentRootPath}/JsonDB/User.json";
+            var userList = System.IO.File.ReadAllText(file);
+            List<User> jsonObject = Newtonsoft.Json.JsonConvert.DeserializeObject<List<User>>(userList);
+            return jsonObject;
+        }
+
 
         // PUT: api/User/5
         [HttpPut("{id}")]

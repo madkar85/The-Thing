@@ -142,8 +142,8 @@ namespace MiracleMileAPI.Controllers
         {
             var contentRootPath = _hostingEnvironment.ContentRootPath;
             var file = $@"{contentRootPath}/JsonDB/User.json";
-            var eFiles = System.IO.File.ReadAllText(file);
-            List<User> jsonObject = Newtonsoft.Json.JsonConvert.DeserializeObject<List<User>>(eFiles);
+            var userList = System.IO.File.ReadAllText(file);
+            List<User> jsonObject = Newtonsoft.Json.JsonConvert.DeserializeObject<List<User>>(userList);
             return jsonObject;
         }
 
