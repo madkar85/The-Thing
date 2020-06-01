@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -42,7 +43,13 @@ namespace MiracleMileAPI.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Post([FromBody] Register register)
         {
-            if(register.Email != null && register.Password != null)
+
+            string pattern = @"^(19|20)?(\d{6}([-+]|\s)\d{4}|(?!19|20)\d{10})$";
+           
+            Match m = Regex.Match(register.SocialSecurityNumber, pattern, RegexOptions.IgnoreCase);
+            
+
+                if (register.Email != null && register.Password != null && m.Success)
             {
                 var newId = Guid.NewGuid().GetHashCode();
                 var user = new User
@@ -50,6 +57,10 @@ namespace MiracleMileAPI.Controllers
                     Id = newId,
                     Email = register.Email,
                     Password = register.Password,
+                    Name = register.Name + " " + register.Surname,
+                    SocialSecurityNumber = register.SocialSecurityNumber,
+                    GivenName = register.Name,
+                    Surname = register.Surname,
                     AgreeMarketing = true,
                     ReceiveNotificationsByMail = true
                 };

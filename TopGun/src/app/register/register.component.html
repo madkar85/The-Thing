@@ -13,6 +13,82 @@
           </div>
           <div class="card-body">
             <form #registerForm="ngForm" class="padding-b">
+
+              <div class="form-group has-error">
+                <label for="name">Namn</label>
+                <input 
+                required
+                type="text" 
+                class="form-control input-line" 
+                id="name" 
+                placeholder="Ange dit name"
+                [(ngModel)]="registerData.name" 
+                name="name"
+                #nameControl="ngModel" >
+       
+                <span 
+                class=" text-danger help-block"
+                 *ngIf="nameControl.errors?.required && nameControl.touched">
+                  Namn fältet får inte vara tom
+              </span>
+
+              </div>
+
+              <div class="form-group has-error">
+                <label for="surname">Efternamn</label>
+                <input 
+                required
+                type="text" 
+                class="form-control input-line" 
+                id="surname" 
+                placeholder="Ange dit efternamn"
+                [(ngModel)]="registerData.surname" 
+                name="surname"
+                #surnameControl="ngModel" >
+       
+                <span 
+                class=" text-danger help-block"
+                 *ngIf="surnameControl.errors?.required && surnameControl.touched">
+                 Efternamn fältet får inte vara tom
+              </span>
+
+              </div>
+
+              
+              <div class="form-group has-error">
+                <label for="socialSecurityNumber">Personnummer</label>
+                <input 
+                required
+                pattern="^(19|20)?(\d{6}([-+]|\s)\d{4}|(?!19|20)\d{10})$"
+                type="text" 
+                class="form-control input-line" 
+                id="socialSecurityNumber" 
+                placeholder="ååååmmdd-xxxx"
+                [(ngModel)]="registerData.socialSecurityNumber" 
+                name="socialSecurityNumber"
+                minlength="12"
+                #socialSecurityNumberControl="ngModel" >
+       
+                <span 
+                class=" text-danger help-block"
+                 *ngIf="socialSecurityNumberControl.errors?.required && socialSecurityNumberControl.touched">
+                 Personnummer fältet får inte vara tom
+              </span>
+
+              <span
+              class="help-block text-danger"
+              *ngIf="socialSecurityNumberControl.errors?.minlength && socialSecurityNumberControl.touched">
+              Personnummer måste var 12 tecken: ååååmmdd-xxxx
+            </span>
+
+              <span
+              class=" text-danger help-block"
+              *ngIf="socialSecurityNumberControl.errors?.pattern && socialSecurityNumberControl.touched">
+              Personnummer är inte giltigt
+            </span>
+
+              </div>
+
               <div class="form-group">
                 <label for="email">Email address</label>
                 <input 
