@@ -48,6 +48,9 @@ export class LoginComponent implements OnInit {
         console.info(res);
         console.info(this.token);
 
+
+        this.authenticationService.startCountingDown();
+
         this.router.navigate(['/mainView']);
 
       

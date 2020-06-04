@@ -125,8 +125,8 @@ namespace MiracleMileAPI.Sessions
             appSettings.TryGet("AppSettings:JwtAudience", out audience);
             appSettings.TryGet("AppSettings:JwtIssuer", out issuer);
             appSettings.TryGet("AppSettings:JwtSecret", out secretKey);
-            appSettings.TryGet("JWtTokenValidMinutes", out tokenValidMinutes);
-            appSettings.TryGet("JWtTimeLeftReminderMinutes", out timeLeftReminderMinutes);
+            appSettings.TryGet("AppSettings:JWtTokenValidMinutes", out tokenValidMinutes);
+            appSettings.TryGet("AppSettings:JWtTimeLeftReminderMinutes", out timeLeftReminderMinutes);
             
             int tokenValidMinutesInt = 0;
             int timeLeftReminderMinutesInt = 0;

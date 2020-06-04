@@ -15,4 +15,5 @@ namespace MiracleMileAPI.Model
         public bool AgreeMarketing { get; set; }
         public bool ReceiveNotificationsByMail { get; set; }
     }
+
 }
