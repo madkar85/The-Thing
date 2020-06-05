@@ -17,7 +17,7 @@ export class AuthGuardService {
     if (!this.authenticationService.isTokenExpired()) {
       return true;
     }
-
+    this.authenticationService.cleanTokenData();
     this.router.navigate(['/login']);
     return false;
   }

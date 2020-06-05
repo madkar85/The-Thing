@@ -60,8 +60,8 @@ namespace MiracleMileAPI.Sessions
             var stream = "";
 
             var data = "";
-
-            if (authToken != null && authToken.StartsWith("Bearer"))
+            // authToken != null && authToken.StartsWith("Bearer")
+            if (authToken != null)
             {
                 //Extract credentials
                 stream = CleanToken(authToken);

@@ -130,6 +130,42 @@ namespace MiracleMileAPI.Controllers
 
         }
 
+           // GET: api/Authenticate
+        [HttpPost("newtoken")]
+        public async Task<IActionResult> NewToken()
+        {
+
+            string authHeaderToken = Request.Headers["bearer"];
+            
+            var socialSecurityNumber = TokenData.GetClaimByKey(authHeaderToken, "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
+            var surname = TokenData.GetClaimByKey(authHeaderToken, "surname");
+            var givenName = TokenData.GetClaimByKey(authHeaderToken, "givenname");
+            var name = givenName + " " + surname;
+
+            var user = new User() {
+                 Name = name,
+                 Surname = surname,
+                GivenName = givenName,
+                SocialSecurityNumber = socialSecurityNumber
+                };
+
+            if (user != null)
+            {
+                var token = TokenData.CreateJwtToken(user);
+
+                return Ok(new Token() { AuthToken = token, });
+            }
+            else
+            {
+                return Ok(new Token() { AuthToken = "", });
+            }
+
+        }
+
+
+
+
+
         [ValidateToken]
         //GET: api/Authenticate/5
         [HttpGet("list")]

@@ -23,7 +23,7 @@ export class HttpInterceptorService implements HttpInterceptor {
     let newHeaders = req.headers;
     if (token) {
       // If we have a token, we append it to our new headers
-      newHeaders = newHeaders.append('authtoken', token);
+      newHeaders = newHeaders.append('Bearer', token);
     }
     // Finally we have to clone our request with our new headers
     // This is required because HttpRequests are immutable

@@ -9,7 +9,7 @@ export class GenericHttpService {
 
   constructor(private httpClient: HttpClient, ) { }
 
-  public post<T>(url: string, item: T): Observable<T> {
+  public post<T>(url: string, item?: T): Observable<T> {
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -18,7 +18,13 @@ export class GenericHttpService {
 
     const options = { headers };
 
-    return this.httpClient.post<T>(url, item, options);
+    if (item === undefined) {
+      return this.httpClient.post<T>(url, options);
+    } else {
+      return this.httpClient.post<T>(url, item, options);
+    }
+
+
   }
 
 
