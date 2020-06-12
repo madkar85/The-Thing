@@ -1,0 +1,8 @@
+
+<div [ngSwitch]="dialogName">  
+    <div *ngSwitchCase="'confirm'">
+        <app-confirm></app-confirm>
+    </div>  
+    <div *ngSwitchCase="'test'">Two is Selected</div>  
+    <div *ngSwitchDefault>Default Option</div>  
+</div>  

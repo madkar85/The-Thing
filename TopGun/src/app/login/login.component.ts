@@ -6,6 +6,7 @@ import { AuthToken } from '../model/auth-token';
 
 import { AuthenticationService } from '../Service/authentication.service';
 import { Router } from '@angular/router';
+import { DialogBoxService } from '../Service/dialog-box.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private validationService: ValidationService,
     private router: Router,
-    private authenticationService: AuthenticationService) { }
+    private authenticationService: AuthenticationService,
+    private dialogBoxService: DialogBoxService) { }
 
   public loginData: Login;
   public token: AuthToken;
@@ -37,7 +39,9 @@ export class LoginComponent implements OnInit {
 
   public login(): void {
 
-    this.authenticationService.getAuthentication(this.loginData).subscribe((res) => {
+
+    this.dialogBoxService.selectDialog('confirm');
+   /* this.authenticationService.getAuthentication(this.loginData).subscribe((res) => {
 
       this.token = res;
 
@@ -56,7 +60,7 @@ export class LoginComponent implements OnInit {
       
       }
 
-    });
+    });*/
 
   }
 

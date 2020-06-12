@@ -8340,11 +8340,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Angular2\\Project\\MiracleMileAPI\\MiracleMileAPI\\MiracleMileAPI.csproj",
+      "projectUniqueName": "E:\\Angular2\\Project\\The-Thing\\MiracleMileAPI\\MiracleMileAPI\\MiracleMileAPI.csproj",
       "projectName": "MiracleMileAPI",
-      "projectPath": "E:\\Angular2\\Project\\MiracleMileAPI\\MiracleMileAPI\\MiracleMileAPI.csproj",
+      "projectPath": "E:\\Angular2\\Project\\The-Thing\\MiracleMileAPI\\MiracleMileAPI\\MiracleMileAPI.csproj",
       "packagesPath": "C:\\Users\\Marco Villegas\\.nuget\\packages\\",
-      "outputPath": "E:\\Angular2\\Project\\MiracleMileAPI\\MiracleMileAPI\\obj\\",
+      "outputPath": "E:\\Angular2\\Project\\The-Thing\\MiracleMileAPI\\MiracleMileAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\",
