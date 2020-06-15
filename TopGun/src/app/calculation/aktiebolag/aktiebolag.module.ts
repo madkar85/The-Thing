@@ -6,8 +6,11 @@ import { AktiebolagComponent } from './aktiebolag.component';
 import { FormsModule } from '@angular/forms';
 
 
+
 @NgModule({
-  declarations: [AktiebolagComponent],
+  declarations: [
+    AktiebolagComponent,
+  ],
   imports: [
     CommonModule,
     AktiebolagRoutingModule,

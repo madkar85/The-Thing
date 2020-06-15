@@ -3,21 +3,23 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
-import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
-import { ConfirmComponent } from '../dialog-box/confirm/confirm.component';
+import { DialogModule } from '../dialog/dialog.module';
+
 
 
 
 @NgModule({
   declarations: [
     LoginComponent,
-    DialogBoxComponent,
-    ConfirmComponent
   ],
   imports: [
     CommonModule,
     LoginRoutingModule,
-    FormsModule
+    FormsModule,
+    DialogModule
+  ],
+  exports: [
   ]
+
 })
 export class LoginModule { }

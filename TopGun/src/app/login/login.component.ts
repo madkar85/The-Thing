@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ValidationService } from '../service/validation.service';
 import { Login } from '../model/login';
 
 import { AuthToken } from '../model/auth-token';
 
 import { AuthenticationService } from '../Service/authentication.service';
 import { Router } from '@angular/router';
-import { DialogBoxService } from '../Service/dialog-box.service';
+import { DialogService } from '../Service/dialog.service';
+import { ExampleComponent } from '../dialog/example/example.component';
+
 
 @Component({
   selector: 'app-login',
@@ -17,15 +18,21 @@ export class LoginComponent implements OnInit {
 
 
   constructor(
-    private validationService: ValidationService,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private dialogBoxService: DialogBoxService) { }
+    public dialog: DialogService) { 
+
+      this.dialog.open(ExampleComponent, {
+        data: { message: 'I am a dynamic component inside of a dialog!' },
+      });
+
+    }
 
   public loginData: Login;
   public token: AuthToken;
   public path = '';
   public showMessage: boolean;
+  public dialogueResponse: boolean;
 
   ngOnInit() {
 
@@ -34,14 +41,15 @@ export class LoginComponent implements OnInit {
     this.loginData.email = '';
     this.loginData.password = '';
 
-
   }
+
+
 
   public login(): void {
 
 
-    this.dialogBoxService.selectDialog('confirm');
-   /* this.authenticationService.getAuthentication(this.loginData).subscribe((res) => {
+    
+    this.authenticationService.getAuthentication(this.loginData).subscribe((res) => {
 
       this.token = res;
 
@@ -57,10 +65,10 @@ export class LoginComponent implements OnInit {
 
         this.router.navigate(['/mainView']);
 
-      
+
       }
 
-    });*/
+    });
 
   }
 
@@ -68,7 +76,7 @@ export class LoginComponent implements OnInit {
     if (this.token.authToken === '') {
       this.message(true);
       return true;
-     
+
     } else {
       this.message(false);
       return false;

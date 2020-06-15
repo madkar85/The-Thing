@@ -13,11 +13,17 @@ export class AktiebolagComponent implements OnInit {
   constructor(private calculationService: CalculationService) { }
 
   public calculationInput: CalculationInput = CalculationInput.empty();
-
+  public test1: any;
+ 
   ngOnInit() {
+
+
+
   }
 
-  public startCalculation(){
+ 
+
+  public startCalculation() {
     this.calculationService.getAktieBolag(this.calculationInput).subscribe((res) => {
 
       console.info(res);
