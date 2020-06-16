@@ -1,4 +1,4 @@
-.overlay {
+/*.overlay {
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -9,6 +9,7 @@
     background: rgba(0, 0, 0, 0.7);
     align-items: center;
     justify-content: center;
+    z-index: 1031;
   }
   
   .dialog {
@@ -19,4 +20,4 @@
     display: flex;
     flex-direction: column;
     padding: 8px;
-  }
+  }*/

@@ -19,14 +19,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService,
-    public dialog: DialogService) { 
-
-      this.dialog.open(ExampleComponent, {
-        data: { message: 'I am a dynamic component inside of a dialog!' },
-      });
-
-    }
+    private authenticationService: AuthenticationService) { }
 
   public loginData: Login;
   public token: AuthToken;

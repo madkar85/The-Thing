@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { DialogService } from 'src/app/Service/dialog.service';
+import { ExampleComponent } from 'src/app/dialog/example/example.component';
 
 
 @Component({
@@ -10,7 +12,7 @@ export class FirmaComponent implements OnInit {
 
   @Input() index: string;
 
-  constructor() { }
+  constructor(public dialog: DialogService) { }
 
   public test2: any;
 
@@ -26,7 +28,15 @@ export class FirmaComponent implements OnInit {
 
 
   test() {
- 
+
+    const ref = this.dialog.open(ExampleComponent, {
+      data: { title: "Påminnelse",message: 'Du har varit inaktiv, om 5 minuter loggas du ut!' },
+    });
+
+    ref.afterClosed.subscribe(result => {
+      console.log('----------------');
+      console.log('Dialog closed', result);
+    });
   }
 
 }

@@ -9,7 +9,7 @@ import { DialogRef } from '../dialog/dialog-ref';
 })
 export class DialogService {
 
-  dialogComponentRef: ComponentRef<DialogComponent>
+  dialogComponentRef: ComponentRef<DialogComponent>;
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
