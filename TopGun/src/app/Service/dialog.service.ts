@@ -3,6 +3,7 @@ import { DialogComponent } from '../dialog/dialog.component';
 import { DialogConfig } from '../dialog/dialog-config';
 import { DialogInjector } from '../dialog/dialog-injector';
 import { DialogRef } from '../dialog/dialog-ref';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class DialogService {
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
     private applicationRef: ApplicationRef,
-    private injector: Injector
+    private injector: Injector,
+    private router: Router
   ) { }
 
   public open(componentType: Type<any>, dialogConfig: DialogConfig) {
@@ -52,12 +54,21 @@ export class DialogService {
 
     this.dialogComponentRef = componentRef;
 
+    this.closeDialogIfRoutChanged();
+
     this.dialogComponentRef.instance.onClose.subscribe(() => {
       this.removeDialogComponentFromBody();
     });
 
-    // return the dialogRef
+  
     return dialogRef;
+  }
+
+
+  private closeDialogIfRoutChanged<T>(): void {
+    this.router.events.subscribe(() => {
+      this.removeDialogComponentFromBody();
+    });
   }
 
   private removeDialogComponentFromBody() {

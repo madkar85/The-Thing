@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DialogService } from 'src/app/Service/dialog.service';
-import { ExampleComponent } from 'src/app/dialog/example/example.component';
+import { ConfirmComponent } from 'src/app/dialog/confirm/confirm.component';
 
 
 @Component({
@@ -29,8 +29,12 @@ export class FirmaComponent implements OnInit {
 
   test() {
 
-    const ref = this.dialog.open(ExampleComponent, {
-      data: { title: "Påminnelse",message: 'Du har varit inaktiv, om 5 minuter loggas du ut!' },
+    const ref = this.dialog.open(ConfirmComponent, {
+      data: {
+        title: 'Påminnelse',
+        message: 'Du har varit inaktiv, om 5 minuter loggas du ut!',
+        firstButton: 'Fortsätt var inloggad',
+        secondButton: 'Logga ut' },
     });
 
     ref.afterClosed.subscribe(result => {

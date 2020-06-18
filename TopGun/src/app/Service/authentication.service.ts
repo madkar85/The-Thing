@@ -6,13 +6,19 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Login } from '../model/login';
 import { GenericHttpService } from './generic-http.service';
 import { Router } from '@angular/router';
+import { DialogService } from './dialog.service';
+import { ConfirmComponent } from '../dialog/confirm/confirm.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
-  constructor(private httpClient: HttpClient, private genericHttpService: GenericHttpService, private router: Router) { }
+  constructor(
+    private httpClient: HttpClient,
+    private genericHttpService: GenericHttpService,
+    private router: Router,
+    public dialogService: DialogService) { }
 
   private tokenName = 'jwt_token';
   private timerSubscription: any;
@@ -158,7 +164,21 @@ export class AuthenticationService {
     const expirationDate = this.getTokenExpirationDate();
     this.reminderSubscription.unsubscribe();
     console.info('Token will expir in 5 min ' + expirationDate.toString() + ', Time now ' + Date.now().toString());
-    alert('Token will expir in 5 min ' + expirationDate.toString() + ', Time now ' + Date.now().toString());
+    const ref = this.dialogService.open(ConfirmComponent, {
+      data: {
+        title: 'Påminnelse',
+        message: 'Du har varit inaktiv, om 5 minuter loggas du ut!',
+        firstButton: 'Fortsätt var inloggad',
+        secondButton: 'Logga ut' },
+    });
+
+    ref.afterClosed.subscribe(result => {
+    if(result){
+      this.RefreshJwtToken();
+    }else{
+      this.logout();
+    }
+    });
   }
 
   tokenHasExpired() {
@@ -167,15 +187,18 @@ export class AuthenticationService {
       console.info('Token has expired');
       const expirationDate = this.getTokenExpirationDate();
       console.info('Token has expired ' + expirationDate.toString() + ', Time now ' + Date.now().toString());
-      alert('Token has expired ' + expirationDate.toString() + ', Time now ' + Date.now().toString());
-      this.deleteToken();
-      this.refreshSubscription.unsubscribe();
-      this.timerSubscription.unsubscribe();
+      // alert('Token has expired ' + expirationDate.toString() + ', Time now ' + Date.now().toString());
+      this.cleanTokenData();
       this.router.navigate(['/login']);
     } else {
       console.info('error in tokenIsExpired func');
     }
 
+  }
+
+  logout(){
+    this.cleanTokenData();
+    this.router.navigate(['/login']);
   }
 
 
