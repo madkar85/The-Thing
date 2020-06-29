@@ -17,7 +17,7 @@ namespace MiracleMileAPI.Model
         public string PhoneNumber { get; set; }
         public string MobilePhoneNumber { get; set; }
         public bool AgreeMarketing { get; set; }
-        public bool ReceiveNotificationsByMail { get; set; }
+        public bool SubscribeToEmailNotification { get; set; }
         public Address Address { get; set; }
 
     }

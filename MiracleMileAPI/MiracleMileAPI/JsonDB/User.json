@@ -1,1 +1,78 @@
-[{"Id":1,"SocialSecurityNumber":"198805199299","Name":"Marco Villegas","GivenName":"Marco","Surname":"Villegas","Email":"Marco.villegas@live.se","Password":"test123","PhoneNumber":"0706880589","MobilePhoneNumber":"0706880589","AgreeMarketing":true,"ReceiveNotificationsByMail":true,"Address":{"City":"stockholm","Country":"sverige","Street":"Terapiv�gen 16","ZipCode":"14156","Attention":null,"CareOf":null}},{"Id":2,"SocialSecurityNumber":"198805199299","Name":"Edwin Villegas","GivenName":"Edwin","Surname":"Villegas","Email":"Edwin.villegas@live.se","Password":"test123","PhoneNumber":"0706880589","MobilePhoneNumber":"0706880589","AgreeMarketing":true,"ReceiveNotificationsByMail":true,"Address":{"City":"stockholm","Country":"sverige","Street":"Terapiv�gen 16","ZipCode":"14156","Attention":null,"CareOf":null}},{"Id":3,"SocialSecurityNumber":"8805199299","Name":"Erik Svenson","GivenName":"Erik","Surname":"Svenson","Email":"Erik.villegas@live.se","Password":"test123","PhoneNumber":"0706880589","MobilePhoneNumber":"0706880589","AgreeMarketing":true,"ReceiveNotificationsByMail":true,"Address":{"City":"stockholm","Country":"sverige","Street":"Terapiv�gen 16","ZipCode":"14156","Attention":null,"CareOf":null}},{"Id":-65100155,"SocialSecurityNumber":"198805199299","Name":"Erik Zom","GivenName":"Erik","Surname":"Zom","Email":"erik@live.se","Password":"test123","PhoneNumber":null,"MobilePhoneNumber":null,"AgreeMarketing":true,"ReceiveNotificationsByMail":true,"Address":null}]
+[
+  {
+    "Id": 1,
+    "SocialSecurityNumber": "198805199299",
+    "Name": "Marco Villegas",
+    "GivenName": "Marco",
+    "Surname": "Villegas",
+    "Email": "Marco.villegas@live.se",
+    "Password": "test123",
+    "PhoneNumber": "0706880589",
+    "MobilePhoneNumber": "0706880589",
+    "AgreeMarketing": true,
+    "SubscribeToEmailNotification": true,
+    "Address": {
+      "City": "stockholm",
+      "Country": "sverige",
+      "Street": "Terapiv�gen 16",
+      "ZipCode": "14156",
+      "Attention": null,
+      "CareOf": null
+    }
+  },
+  {
+    "Id": 2,
+    "SocialSecurityNumber": "198805199299",
+    "Name": "Edwin Villegas",
+    "GivenName": "Edwin",
+    "Surname": "Villegas",
+    "Email": "Edwin.villegas@live.se",
+    "Password": "test123",
+    "PhoneNumber": "0706880589",
+    "MobilePhoneNumber": "0706880589",
+    "AgreeMarketing": true,
+    "SubscribeToEmailNotification": true,
+    "Address": {
+      "City": "stockholm",
+      "Country": "sverige",
+      "Street": "Terapiv�gen 16",
+      "ZipCode": "14156",
+      "Attention": null,
+      "CareOf": null
+    }
+  },
+  {
+    "Id": 3,
+    "SocialSecurityNumber": "8805199299",
+    "Name": "Erik Svenson",
+    "GivenName": "Erik",
+    "Surname": "Svenson",
+    "Email": "Erik.villegas@live.se",
+    "Password": "test123",
+    "PhoneNumber": "0706880589",
+    "MobilePhoneNumber": "0706880589",
+    "AgreeMarketing": true,
+    "SubscribeToEmailNotification": true,
+    "Address": {
+      "City": "stockholm",
+      "Country": "sverige",
+      "Street": "Terapiv�gen 16",
+      "ZipCode": "14156",
+      "Attention": null,
+      "CareOf": null
+    }
+  },
+  {
+    "Id": -65100155,
+    "SocialSecurityNumber": "198805199299",
+    "Name": "Erik Zom",
+    "GivenName": "Erik",
+    "Surname": "Zom",
+    "Email": "erik@live.se",
+    "Password": "test123",
+    "PhoneNumber": null,
+    "MobilePhoneNumber": null,
+    "AgreeMarketing": true,
+    "SubscribeToEmailNotification": true,
+    "Address": null
+  }]

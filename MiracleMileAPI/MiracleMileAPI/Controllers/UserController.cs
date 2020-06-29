@@ -62,7 +62,7 @@ namespace MiracleMileAPI.Controllers
                     GivenName = register.Name,
                     Surname = register.Surname,
                     AgreeMarketing = true,
-                    ReceiveNotificationsByMail = true
+                    SubscribeToEmailNotification = true
                 };
 
                 List<User> jsonList = getUsers();
