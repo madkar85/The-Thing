@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   authenticate_url: 'https://localhost:44365/miraclemile/authenticate',
   refreshToken_url: 'https://localhost:44365/miraclemile/newtoken',
-  register_url: 'https://localhost:44365/miraclemile/register',
+  register_url: 'https://localhost:44365/miraclemile/registeruser',
+  get_user_url: 'https://localhost:44365/miraclemile/getuser',
   aktiebolag_url: 'https://localhost:44365/miraclemile/aktiebolag'
 };
 

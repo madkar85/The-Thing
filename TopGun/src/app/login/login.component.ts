@@ -7,6 +7,7 @@ import { AuthenticationService } from '../Service/authentication.service';
 import { Router } from '@angular/router';
 import { DialogService } from '../Service/dialog.service';
 import { ExampleComponent } from '../dialog/example/example.component';
+import { UserService } from '../Service/user.service';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService) { }
+    private authenticationService: AuthenticationService,
+    private userService: UserService) { }
 
   public loginData: Login;
   public token: AuthToken;
@@ -55,6 +57,16 @@ export class LoginComponent implements OnInit {
 
 
         this.authenticationService.startCountingDown();
+
+        this.userService.getAuthenticatedUser().subscribe((res) => {
+
+
+          console.info('--------set user-----------');
+          console.info(res);
+          this.userService.setUser(res);
+          console.info('--------get user from service-----------');
+          console.info(this.userService.getUser());
+        });
 
         this.router.navigate(['/mainView']);
 

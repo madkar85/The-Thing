@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MiracleMileAPI.Model;
+using MiracleMileAPI.Sessions;
 using Newtonsoft.Json;
 
 namespace MiracleMileAPI.Controllers
@@ -40,7 +41,7 @@ namespace MiracleMileAPI.Controllers
         }
 
         // POST: api/User
-        [HttpPost("register")]
+        [HttpPost("registeruser")]
         public async Task<IActionResult> Post([FromBody] Register register)
         {
 
@@ -65,7 +66,7 @@ namespace MiracleMileAPI.Controllers
                     SubscribeToEmailNotification = true
                 };
 
-                List<User> jsonList = getUsers();
+                List<User> jsonList = GetUsers();
 
                 jsonList.Add(user);
                 //write string to file
@@ -86,7 +87,8 @@ namespace MiracleMileAPI.Controllers
             
         }
 
-        private List<User> getUsers()
+       
+        private List<User> GetUsers()
         {
             var contentRootPath = _hostingEnvironment.ContentRootPath;
             var file = $@"{contentRootPath}/JsonDB/User.json";
@@ -95,6 +97,32 @@ namespace MiracleMileAPI.Controllers
             return jsonObject;
         }
 
+        [HttpPost("getuser")]
+        public async Task<IActionResult> GetUser()
+        {
+            
+            string authHeaderToken = Request.Headers["bearer"];
+            if (authHeaderToken != null)
+            {
+                var givenName = TokenData.GetClaimByKey(authHeaderToken, "givenname");
+                var socialSecurityNumber = TokenData.GetClaimByKey(authHeaderToken, "sub");
+                var users = GetUsers();
+                var user = users.FirstOrDefault(u => u.SocialSecurityNumber.ToLower() == socialSecurityNumber.ToLower() && u.GivenName.ToLower() == givenName.ToLower());
+                if (user != null)
+                {
+                    return Ok(user);
+                }
+                else
+                {
+                    return Unauthorized();
+                }
+            }
+            else
+            {
+                return Unauthorized();
+            }
+
+        }
 
         // PUT: api/User/5
         [HttpPut("{id}")]

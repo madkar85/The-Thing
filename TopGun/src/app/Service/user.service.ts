@@ -12,14 +12,48 @@ export class UserService {
 
   constructor(private genericHttpService: GenericHttpService) { }
 
-   private userSource: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
-   public currentUser: Observable<User| null> = this.userSource.asObservable();
+  private userSource: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
+  public currentUser: Observable<User | null> = this.userSource.asObservable();
 
+
+  /**
+   * Addd user to server
+   */
   public addUser(registerData: Register): Observable<any> {
 
     const url = environment.register_url;
 
     return this.genericHttpService.post<Register>(url, registerData);
+  }
+
+
+  /**
+   * Gets user from the server.
+   */
+  public getAuthenticatedUser(): Observable<User> {
+
+    const url = environment.get_user_url;
+
+    return this.genericHttpService.post<User>(url);
+
+  }
+
+  /**
+   * Set logged in user.
+   */
+  public setUser(user: User) {
+
+    this.userSource.next(user);
+
+  }
+
+  /**
+   * Get current value from Observable without subscribing (just want value one time).
+   */
+  public getUser() {
+
+    return this.userSource.value;
+
   }
 
 }
