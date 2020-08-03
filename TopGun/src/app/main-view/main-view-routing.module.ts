@@ -11,6 +11,8 @@ const routes: Routes = [
      { path: 'aktiebolag', loadChildren: () => import('../calculation/aktiebolag/aktiebolag.module').then(m => m.AktiebolagModule), canActivate: [AuthGuardService] },
      // tslint:disable-next-line: max-line-length
      { path: 'enskildfirma', loadChildren: () => import('../calculation/enskildfirma/enskildfirma.module').then(m => m.EnskildfirmaModule), canActivate: [AuthGuardService] },
+     // tslint:disable-next-line: max-line-length
+     { path: 'userSettings', loadChildren: () => import('../user-settings/user-settings.module').then(m => m.UserSettingsModule) }
    ] }
 ];
 

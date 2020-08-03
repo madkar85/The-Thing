@@ -14,4 +14,8 @@ export class User {
     public subscribeToEmailNotification: boolean;
     public address: Address | null;
 
+    constructor(data: Partial<User>) {
+        Object.assign(this, data);
+    }
+
 }

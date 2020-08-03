@@ -12,8 +12,8 @@ export class UserService {
 
   constructor(private genericHttpService: GenericHttpService) { }
 
-  private userSource: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
-  public currentUser: Observable<User | null> = this.userSource.asObservable();
+  private userSource: BehaviorSubject<User> = new BehaviorSubject<User>(new User({ name: '' }));
+  public currentUser: Observable<User> = this.userSource.asObservable();
 
 
   /**

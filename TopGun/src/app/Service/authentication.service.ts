@@ -87,6 +87,13 @@ export class AuthenticationService {
     return JSON.parse(jsonPayload);
   }
 
+  getDataFromToken(dataName: string) {
+    const token = this.getToken();
+    const decoded = this.parseJwt(token);
+
+    return decoded[dataName];
+  }
+
   // displays message before logging out as well, check if users are active and renews the token if user is aktiv
 
   startCountingDown() {
@@ -122,7 +129,7 @@ export class AuthenticationService {
 
     this.refreshJwtTokenSubscription = this.RefreshJwtToken.bind(this);
 
-    document.body.addEventListener('click',  this.refreshJwtTokenSubscription);
+    document.body.addEventListener('click', this.refreshJwtTokenSubscription);
     document.body.addEventListener('keydown', this.refreshJwtTokenSubscription);
   }
 
@@ -153,9 +160,11 @@ export class AuthenticationService {
     document.body.removeEventListener('click', this.refreshJwtTokenSubscription);
     document.body.removeEventListener('keydown', this.refreshJwtTokenSubscription);
     this.deleteToken();
-    this.refreshSubscription.unsubscribe();
-    this.reminderSubscription.unsubscribe();
-    this.timerSubscription.unsubscribe();
+    if (this.refreshSubscription) {
+      this.refreshSubscription.unsubscribe();
+      this.reminderSubscription.unsubscribe();
+      this.timerSubscription.unsubscribe();
+    }
 
   }
 
@@ -169,15 +178,16 @@ export class AuthenticationService {
         title: 'Påminnelse',
         message: 'Du har varit inaktiv, om 5 minuter loggas du ut!',
         firstButton: 'Fortsätt var inloggad',
-        secondButton: 'Logga ut' },
+        secondButton: 'Logga ut'
+      },
     });
 
     ref.afterClosed.subscribe(result => {
-    if(result){
-      this.RefreshJwtToken();
-    }else{
-      this.logout();
-    }
+      if (result) {
+        this.RefreshJwtToken();
+      } else {
+        this.logout();
+      }
     });
   }
 
@@ -196,7 +206,7 @@ export class AuthenticationService {
 
   }
 
-  logout(){
+  logout() {
     this.cleanTokenData();
     this.router.navigate(['/login']);
   }

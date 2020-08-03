@@ -55,21 +55,12 @@ export class LoginComponent implements OnInit {
         console.info(res);
         console.info(this.token);
 
-
         this.authenticationService.startCountingDown();
-
-        this.userService.getAuthenticatedUser().subscribe((res) => {
-
-
-          console.info('--------set user-----------');
-          console.info(res);
-          this.userService.setUser(res);
-          console.info('--------get user from service-----------');
-          console.info(this.userService.getUser());
-        });
+        console.info('parse token');
+        console.info(this.authenticationService.parseJwt(this.token.authToken));
+        
 
         this.router.navigate(['/mainView']);
-
 
       }
 
