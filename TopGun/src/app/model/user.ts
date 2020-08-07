@@ -12,10 +12,27 @@ export class User {
     public mobilePhoneNumber: string;
     public agreeMarketing: boolean;
     public subscribeToEmailNotification: boolean;
-    public address: Address | null;
+    public address: Address;
 
     constructor(data: Partial<User>) {
         Object.assign(this, data);
+    }
+
+    public static empty(): User {
+        return new User({
+            id: 0,
+            socialSecurityNumber: '',
+            name: '',
+            givenName: '',
+            surname: '',
+            email: '',
+            password: '',
+            phoneNumber: '',
+            mobilePhoneNumber: '',
+            agreeMarketing: false,
+            subscribeToEmailNotification: false,
+            address: Address.empty()
+        });
     }
 
 }

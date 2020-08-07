@@ -7,14 +7,14 @@
     "Surname": "Villegas",
     "Email": "Marco.villegas@live.se",
     "Password": "test123",
-    "PhoneNumber": "0706880589",
+    "PhoneNumber": "086218900",
     "MobilePhoneNumber": "0706880589",
     "AgreeMarketing": true,
     "SubscribeToEmailNotification": true,
     "Address": {
       "City": "stockholm",
       "Country": "sverige",
-      "Street": "Terapiv�gen 16",
+      "Street": "Terapivägen 16",
       "ZipCode": "14156",
       "Attention": null,
       "CareOf": null
@@ -35,7 +35,7 @@
     "Address": {
       "City": "stockholm",
       "Country": "sverige",
-      "Street": "Terapiv�gen 16",
+      "Street": "Terapivägen 16",
       "ZipCode": "14156",
       "Attention": null,
       "CareOf": null
@@ -56,7 +56,7 @@
     "Address": {
       "City": "stockholm",
       "Country": "sverige",
-      "Street": "Terapiv�gen 16",
+      "Street": "Terapivägen 16",
       "ZipCode": "14156",
       "Attention": null,
       "CareOf": null

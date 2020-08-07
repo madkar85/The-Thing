@@ -12,7 +12,7 @@ export class UserService {
 
   constructor(private genericHttpService: GenericHttpService) { }
 
-  private userSource: BehaviorSubject<User> = new BehaviorSubject<User>(new User({ name: '' }));
+  private userSource: BehaviorSubject<User> = new BehaviorSubject<User>(User.empty());
   public currentUser: Observable<User> = this.userSource.asObservable();
 
 
@@ -24,6 +24,18 @@ export class UserService {
     const url = environment.register_url;
 
     return this.genericHttpService.post<Register>(url, registerData);
+  }
+
+  public getCustomerUserProfile() {
+
+    this.getAuthenticatedUser().subscribe((res) => {
+
+      if (res) {
+        this.setUser(res);
+      }
+
+    });
+
   }
 
 
