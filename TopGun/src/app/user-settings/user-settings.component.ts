@@ -15,6 +15,8 @@ export class UserSettingsComponent implements OnInit, AfterViewInit {
   @ViewChild('userForm', { static: false }) userForm: NgForm;
   public user: User = User.empty();
   public originalUser: User = User.empty();
+  public successMessage: string;
+  public showSuccessful = true;
 
   constructor(private userService: UserService, private phoneNumberService: PhoneNumberService) { }
 
@@ -159,6 +161,19 @@ export class UserSettingsComponent implements OnInit, AfterViewInit {
 
 
   saveUser() {
+
+    this.userService.updateCustomerProfile(this.user).subscribe({
+      next: (updatedUser: User) => {
+        this.successMessage = 'Kontaktuppgifter har sparats';
+        this.showSuccessful = false;
+        this.userForm.form.markAsPristine();
+        // reload the profile from server. We are alredy listening for changes in user
+        setTimeout(() => {
+          this.showSuccessful = true;
+          this.successMessage = '';
+        }, 6000);
+      }
+    });
 
   }
 

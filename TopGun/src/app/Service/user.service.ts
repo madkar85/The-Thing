@@ -51,6 +51,23 @@ export class UserService {
   }
 
   /**
+   * A call to update the customer profile with new data. THis method returns an observable, however, the
+   * result is also published in the Observable userSource. So if the client already subscribes the new User
+   * data by subscribing to userSource, that client will be notified once this operation has succeeded.
+   */
+  updateCustomerProfile(user: User): Observable<User> {
+    const url = environment.update_user_url;
+    const updatedUser = this.genericHttpService.post<User>(url, user);
+
+    // when the result is returned from the server, update any listener to profile$.
+    updatedUser.subscribe({
+      next: (updated) => this.userSource.next(updated)
+    });
+
+    return updatedUser;
+  }
+
+  /**
    * Set logged in user.
    */
   public setUser(user: User) {

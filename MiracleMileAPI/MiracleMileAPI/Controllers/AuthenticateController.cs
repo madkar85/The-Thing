@@ -131,7 +131,7 @@ namespace MiracleMileAPI.Controllers
         }
 
            // GET: api/Authenticate
-        [HttpPost("newtoken")]
+        [HttpPost("newToken")]
         public async Task<IActionResult> NewToken()
         {
 

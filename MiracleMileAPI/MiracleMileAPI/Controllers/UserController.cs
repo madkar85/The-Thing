@@ -41,7 +41,7 @@ namespace MiracleMileAPI.Controllers
         }
 
         // POST: api/User
-        [HttpPost("registeruser")]
+        [HttpPost("registerUser")]
         public async Task<IActionResult> Post([FromBody] Register register)
         {
 
@@ -97,7 +97,7 @@ namespace MiracleMileAPI.Controllers
             return jsonObject;
         }
 
-        [HttpPost("getuser")]
+        [HttpPost("getUser")]
         public async Task<IActionResult> GetUser()
         {
             
@@ -124,6 +124,53 @@ namespace MiracleMileAPI.Controllers
 
         }
 
+
+        [HttpPost("updateUser")]
+        public async Task<IActionResult> UpdateUser([FromBody] User postData)
+        {
+
+            string authHeaderToken = Request.Headers["bearer"];
+            if (authHeaderToken != null)
+            {
+                var givenName = TokenData.GetClaimByKey(authHeaderToken, "givenname");
+                var socialSecurityNumber = TokenData.GetClaimByKey(authHeaderToken, "sub");
+                var users = GetUsers();
+                var user = users.FirstOrDefault(u => u.SocialSecurityNumber.ToLower() == socialSecurityNumber.ToLower() && u.GivenName.ToLower() == givenName.ToLower());
+                if (user != null)
+                {
+
+                    for (int i = 0; i < users.Count; i++) // Loop through List with for
+                    {
+                       
+                        if(users[i].SocialSecurityNumber.ToLower() == socialSecurityNumber.ToLower() && users[i].GivenName.ToLower() == givenName.ToLower())
+                        {
+                            users[i].Email = postData.Email;
+                            users[i].SubscribeToEmailNotification = postData.SubscribeToEmailNotification;
+                            users[i].AgreeMarketing = postData.AgreeMarketing;
+                            users[i].MobilePhoneNumber = postData.MobilePhoneNumber;
+                            users[i].PhoneNumber = postData.PhoneNumber;
+                        }
+
+                    }
+
+                    var jsonData = JsonConvert.SerializeObject(users);
+                    var contentRootPath = _hostingEnvironment.ContentRootPath;
+                    var file = $@"{contentRootPath}/JsonDB/User.json";
+                    System.IO.File.WriteAllText(file, jsonData);
+
+                    return Ok(user);
+                }
+                else
+                {
+                    return Unauthorized();
+                }
+            }
+            else
+            {
+                return Unauthorized();
+            }
+
+        }
         // PUT: api/User/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
