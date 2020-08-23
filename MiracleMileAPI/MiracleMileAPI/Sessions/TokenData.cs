@@ -181,6 +181,7 @@ namespace MiracleMileAPI.Sessions
                 new Claim ("displayname", user.Name),
                 new Claim ("surname", user.Surname),
                 new Claim ("givenname", user.GivenName),
+                new Claim ("id", user.Id.ToString()),
             };
 
             // Add act on behalf of self claim.
