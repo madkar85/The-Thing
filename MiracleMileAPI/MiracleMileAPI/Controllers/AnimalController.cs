@@ -13,7 +13,7 @@ namespace MiracleMileAPI.Controllers
     public class AnimalController : ControllerBase
     {
         // GET: api/Animal
-        [HttpPost("getAnimalTypes")]
+        [HttpGet("getAnimalTypes")]
         public IEnumerable<string> GetAnimalTypes()
         {
          
@@ -42,9 +42,10 @@ namespace MiracleMileAPI.Controllers
         }
 
         // POST: api/Animal
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost("getdog")]
+        public void Post([FromBody] DogInfo value)
         {
+           var test = value;
         }
 
         // PUT: api/Animal/5

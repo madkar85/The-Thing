@@ -9,6 +9,7 @@ using IronPython.Hosting;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using MiracleMileAPI.Filters;
 using MiracleMileAPI.Http;
 using MiracleMileAPI.Model;
@@ -23,8 +24,8 @@ namespace MiracleMileAPI.Controllers
     public class AuthenticateController : ControllerBase
     {
         MakeHttpRequest MakeHttpRequest;
-        private readonly IHostingEnvironment _hostingEnvironment;
-        public AuthenticateController(IHttpClientFactory clientFactory, IHostingEnvironment hostingEnvironment)
+        private readonly IWebHostEnvironment _hostingEnvironment;
+        public AuthenticateController(IHttpClientFactory clientFactory, IWebHostEnvironment hostingEnvironment)
         {
             _hostingEnvironment = hostingEnvironment;
             MakeHttpRequest = new MakeHttpRequest(clientFactory);

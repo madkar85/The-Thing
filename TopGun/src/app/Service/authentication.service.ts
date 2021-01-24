@@ -76,6 +76,15 @@ export class AuthenticationService {
     return this.genericHttpService.post<any>(url, logindata);
   }
 
+
+ /* public getDog(): Observable<any> {
+    var dogData = '{"txtRegnr":"SE35276/2018","txtIDnummer":"","txtChipnr":"","txtHundnamn":"","ddlRasIn":"","ddlKon":"","txtLicensnr":""}';
+
+    const url = 'https://hundar.skk.se/hunddata/Hund_sok.aspx/HundData';
+
+    return this.genericHttpService.post<any>(url, dogData);
+  }*/
+
   public parseJwt(token: any) {
     const base64Url = token.split('.')[1];
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
