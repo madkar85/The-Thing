@@ -25,10 +25,17 @@ namespace MiracleMileAPI.Controllers
 
         }
 
-    
+        // PUT api/<MessageController>/5
+        [HttpPost("getMessagesRoomUserIsIn")]
+        public void GetMessagesRoomUserIsIn(int id, [FromBody] string value)
+        {
+
+            //GetAllMessagesRoomUserIsIn(int myUser, bool roomType)
+
+        }
 
         // PUT api/<MessageController>/5
-        [HttpPost("ReplyToMessage")]
+        [HttpPost("replyToMessage")]
         public void ReplyToMessage(int id, [FromBody] string value)
         {
 
@@ -37,7 +44,7 @@ namespace MiracleMileAPI.Controllers
         }
 
         // PUT api/<MessageController>/5
-        [HttpPost("CreatePublicMessage")]
+        [HttpPost("createPublicMessage")]
         public void CreatePublicMessage(int id, [FromBody] string value)
         {
 
@@ -46,7 +53,7 @@ namespace MiracleMileAPI.Controllers
         }
 
         // PUT api/<MessageController>/5
-        [HttpPost("CreatePrivateMessage")]
+        [HttpPost("createPrivateMessage")]
         public void CreatePrivateMessage(int id, [FromBody] string value)
         {
 
@@ -54,8 +61,40 @@ namespace MiracleMileAPI.Controllers
 
         }
 
-   
+
         /*--------------------------- Message code  ------------------------------------------*/
+
+        private List<MessageRoom> GetAllMessagesRoomUserIsIn(int myUser, bool roomType)
+        {
+
+            var messageRoomParticipantJsonData = GetJsonData<MessageRoomParticipant>("MessageRoomParticipant");
+
+            var messageRoomParticipantList = messageRoomParticipantJsonData.Where(u => u.UserId == myUser);
+
+            var MessageRoomJsonData = GetJsonData<MessageRoom>("MessageRoom");
+
+            List<MessageRoom> NewMessageRoomList = new List<MessageRoom>();
+
+            foreach (var item in messageRoomParticipantList)
+            {
+                if (roomType && CheckIfMessageRoomPrivate(myUser, item.MessageRoomId))
+                {
+
+                    NewMessageRoomList.Add(MessageRoomJsonData.FirstOrDefault(u => u.Id == item.MessageRoomId));
+                }
+
+                if (!roomType && !CheckIfMessageRoomPrivate(myUser, item.MessageRoomId))
+                {
+
+                    NewMessageRoomList.Add(MessageRoomJsonData.FirstOrDefault(u => u.Id == item.MessageRoomId));
+
+                }
+
+
+            }
+
+            return NewMessageRoomList;
+        }
 
         private bool CheckJsonFileEmpty(string jsonName)
         {
