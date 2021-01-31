@@ -35,6 +35,25 @@ namespace MiracleMileAPI.Controllers
         }
 
         // PUT api/<MessageController>/5
+        [HttpPost("getAllMessagesRooms")]
+        public void GetAllMessagesRooms(int id, [FromBody] string value)
+        {
+
+            //GetAllMessagesRooms(int myUser, bool roomType)
+
+        }
+
+
+        // PUT api/<MessageController>/5
+        [HttpPost("getMessagesRoom")]
+        public void GetMessagesRoom(int id, [FromBody] string value)
+        {
+
+            //GetMessagesRoom(int myUser, int messageRoomId)
+
+        }
+
+        // PUT api/<MessageController>/5
         [HttpPost("replyToMessage")]
         public void ReplyToMessage(int id, [FromBody] string value)
         {
@@ -61,8 +80,118 @@ namespace MiracleMileAPI.Controllers
 
         }
 
+        // PUT api/<MessageController>/5
+        [HttpPost("messageRoomLike")]
+        public void MessageRoomLike(int id, [FromBody] string value)
+        {
+
+            //AddAndRemoveMessageRoomLike(int Id, int myUser)
+
+        }
+
 
         /*--------------------------- Message code  ------------------------------------------*/
+
+        private  void AddAndRemoveMessageRoomLike(int Id, int myUser)
+        {
+
+            var likeJsonData = GetJsonData<Like>("Like");
+
+            var like = likeJsonData.Where(u => u.Id == Id && u.UserId == myUser).First();
+
+            if (String.IsNullOrEmpty(like.Id.ToString()))
+            {
+                var randomId = new Random();
+
+                var newLike = new Like()
+                {
+                    Id = randomId.Next(),
+                    UserId = myUser,
+                    MessageRoomId = Id,
+                    Created = DateTime.Now,
+                    Active = true,
+
+                };
+
+                CheckAndAddDataToJson<Like>("Like", newLike);
+            }
+            else
+            {
+                if (like.Active)
+                {
+                    like.Active = false;
+                }
+                else
+                {
+                    like.Active = true;
+                }
+
+                CheckAndAddDataToJson("Like", like);
+            }
+
+        }
+
+
+        private List<MessageRoom> GetMessagesRoom(int myUser, int messageRoomId)
+        {
+
+            var MessageRoomJsonData = GetJsonData<MessageRoom>("MessageRoom");
+
+            MessageRoomJsonData.Where(u => u.Id == messageRoomId);
+
+            List<MessageRoom> NewMessageRoomList = new List<MessageRoom>();
+
+
+            if (CheckIfMessageRoomPrivate(messageRoomId))
+            {
+                if (CheckIfUserExistMessageRoom(myUser, messageRoomId))
+                {
+                    return MessageRoomJsonData;
+
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+            else
+            {
+
+
+                return MessageRoomJsonData;
+
+
+            }
+
+
+        }
+
+        private List<MessageRoom> GetAllMessagesRooms(int myUser, bool roomType)
+        {
+
+
+
+            var MessageRoomJsonData = GetJsonData<MessageRoom>("MessageRoom");
+
+            List<MessageRoom> NewMessageRoomList = new List<MessageRoom>();
+
+            foreach (var item in MessageRoomJsonData)
+            {
+
+
+                if (!item.PrivateMessageRoom)
+                {
+
+                    NewMessageRoomList.Add(item);
+
+                }
+
+
+            }
+
+            return NewMessageRoomList;
+        }
 
         private List<MessageRoom> GetAllMessagesRoomUserIsIn(int myUser, bool roomType)
         {
@@ -77,13 +206,13 @@ namespace MiracleMileAPI.Controllers
 
             foreach (var item in messageRoomParticipantList)
             {
-                if (roomType && CheckIfMessageRoomPrivate(myUser, item.MessageRoomId))
+                if (roomType && CheckIfMessageRoomPrivate(item.MessageRoomId))
                 {
 
                     NewMessageRoomList.Add(MessageRoomJsonData.FirstOrDefault(u => u.Id == item.MessageRoomId));
                 }
 
-                if (!roomType && !CheckIfMessageRoomPrivate(myUser, item.MessageRoomId))
+                if (!roomType && !CheckIfMessageRoomPrivate(item.MessageRoomId))
                 {
 
                     NewMessageRoomList.Add(MessageRoomJsonData.FirstOrDefault(u => u.Id == item.MessageRoomId));
@@ -95,6 +224,8 @@ namespace MiracleMileAPI.Controllers
 
             return NewMessageRoomList;
         }
+
+      
 
         private bool CheckJsonFileEmpty(string jsonName)
         {
@@ -272,7 +403,7 @@ namespace MiracleMileAPI.Controllers
             return userCanReply;
         }
 
-        private bool CheckIfMessageRoomPrivate(int myUser, int messagRoomId)
+        private bool CheckIfMessageRoomPrivate(int messagRoomId)
         {
             var userCanReply = false;
 
