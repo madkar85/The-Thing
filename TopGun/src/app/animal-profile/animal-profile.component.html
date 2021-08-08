@@ -1,52 +1,119 @@
 <div class="container margin-top">
-    <div [ngClass]="{ hide: showSuccessful }" class="successful">{{ successMessage }}</div>
-      <form #animalForm="ngForm">
+  <div [ngClass]="{ hide: showSuccessful }" class="successful">{{ successMessage }}</div>
+  <form #animalForm="ngForm">
+    <div class="row">
+      <div class="col">
 
         <div class="form-group">
-        <label for="inputDateOfBirth" class="control-label">Födelsedatum</label>
-        <input
-          type="date"
-          class="form-control"
-          name="inputDateOfBirth"
-          id="inputDateOfBirth"
-          placeholder="Ange din e-postadress"
-          name="date"
-          [(ngModel)]="animal.dateOfBirth"
-          #DateOfBirthControl="ngModel"
-          required 
-        />
-        <span
-          class="help-block text-danger"
-          *ngIf="(DateOfBirthControl.errors && DateOfBirthControl.touched)">Får inte vara tom</span>
-      </div>
-
-      <div class="form-group">
-        <label for="exampleFormControlSelect1">Type</label>
-        <select class="form-control" id="exampleFormControlSelect1">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-
-      <form>
-        <div class="form-group">
-          <label for="exampleFormControlFile1">Example file input</label>
-          <input type="file" class="form-control-file" id="exampleFormControlFile1">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name" required [(ngModel)]="model.name" name="name">
         </div>
-      </form>
+      </div>
+      <div class="col">
 
+        <div class="form-group">
+          <label for="inputDateOfBirth" class="control-label">Födelsedatum</label>
 
-        <button
-        type="submit"
-        class="btn btn-primary"
-        (click)="saveAnimal()"
-        [disabled]="animalForm.invalid || !animalForm.dirty"
-      >
+          <input type="date" class="form-control" id="date" [ngModel]="model.dateOfBirth | date:'y-MM-dd'"
+            (ngModelChange)="model.dateOfBirth = $event" name="birthday">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+
+        <div class="form-group">
+          <label for="type">Type</label>
+          <select class="form-control" id="type" required [(ngModel)]="model.type" name="type">
+            <option class="dropdown-item" disabled selected value="">Select an Option</option>
+            <option *ngFor="let typ of types" [ngValue]="typ">{{typ}}</option>
+
+          </select>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label for="type">Breed</label>
+          <select class="form-control" id="breed" required [(ngModel)]="model.breed" name="breed">
+            <option class="dropdown-item" disabled selected value="">Select an Option</option>
+            <option *ngFor="let breed of breeds" [ngValue]="breed">{{breed}}</option>
+
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label for="type">Gender</label>
+          <select class="form-control" id="gender" required [(ngModel)]="model.gender" name="gender">
+            <option class="dropdown-item" disabled selected value="">Select an Option</option>
+            <option *ngFor="let gender of genders" [ngValue]="gender">{{gender}}</option>
+
+          </select>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label for="type">Size</label>
+          <select class="form-control" id="size" required [(ngModel)]="model.size" name="size">
+            <option class="dropdown-item" disabled selected value="">Select an Option</option>
+            <option *ngFor="let size of sizes" [ngValue]="size.value">{{size.value}}</option>
+
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input type="text" class="form-control" id="description" required [(ngModel)]="model.description"
+            name="description">
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label for="type">Owner</label>
+          <select class="form-control" id="owner" required [(ngModel)]="model.ownerId" name="owner">
+            <option class="dropdown-item" disabled selected value=0>Select an Option</option>
+            <option *ngFor="let use of users" [ngValue]="use.id">{{use.name}}</option>
+
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-8">
+        <div class="form-group">
+          <app-upload-files [url]="model.photo" [buttonTitle]="dogPictureLabel" (selectFileEvent)="selectedFileItem($event)"></app-upload-files>
+          <!-- <a (click)="downloadLink(model.photo)" class="btn btn-link">Download</a> -->
+          <button type="button" (click)="downloadLink(model.photo, dogPictureLabel)" class="btn btn-link btn-sm" *ngIf="model.photo">Download</button>
+        </div>
+      </div>
+      
+      <div class="col-4">
+        <div class="form-group">
+          <app-upload-files [url]="model.certificate" [buttonTitle]="cerficatePictureLabel"  (selectFileEvent)="selectedCertificateFileItem($event)"></app-upload-files>
+          <button type="button" (click)="downloadLink(model.certificate, cerficatePictureLabel)" class="btn btn-link btn-sm" *ngIf="model.certificate">Download</button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <app-upload-files [buttonTitle]="dogPictureLabel" [enableUploadManyFiles]="true"  (selectFileEvent)="selectedFileItem($event)"></app-upload-files>
+          <!-- <a (click)="downloadLink(model.photo)" class="btn btn-link">Download</a> -->
+          <!-- <button type="button" (click)="downloadLink(model.photo, dogPictureLabel)" class="btn btn-link btn-sm" *ngIf="model.photo">Download</button> -->
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary" (click)="saveAnimal()"
+        [disabled]="animalForm.invalid || !animalForm.dirty">
         Spara
       </button>
 
-    </form>
+    </div>
+  </form>
 </div>

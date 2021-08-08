@@ -21,8 +21,9 @@ export class UserSettingsComponent implements OnInit, AfterViewInit {
   constructor(private userService: UserService, private phoneNumberService: PhoneNumberService) { }
 
   ngOnInit(): void {
-
+    if(this.userService.checkUser()){
     this.userService.getCustomerUserProfile();
+    }
 
     this.userService.currentUser.subscribe(userData => {
 

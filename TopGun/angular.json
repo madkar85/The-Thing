@@ -131,6 +131,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "TopGun"
+    }
+  },
+  "defaultProject": "TopGun",
+  "cli": {
+    "analytics": "b17422e7-4044-4bf9-bb23-3cc92fffac0d"
+  }
 }

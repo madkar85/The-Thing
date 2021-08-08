@@ -85,4 +85,14 @@ export class UserService {
 
   }
 
+  public checkUser(){
+
+    if(this.userSource.value){
+      return true;
+    }else{
+      return false;
+    }
+
+  }
+
 }

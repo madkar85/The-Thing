@@ -9,7 +9,8 @@ export const environment = {
   register_url: 'https://localhost:44365/miraclemile/registerUser',
   update_user_url: 'https://localhost:44365/miraclemile/updateUser',
   get_user_url: 'https://localhost:44365/miraclemile/getUser',
-  aktiebolag_url: 'https://localhost:44365/miraclemile/aktiebolag'
+  aktiebolag_url: 'https://localhost:44365/miraclemile/aktiebolag',
+  upload_files_url: 'https://localhost:44365/miraclemile/upload'
 };
 
 /*
