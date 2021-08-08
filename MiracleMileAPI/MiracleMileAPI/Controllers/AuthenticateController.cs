@@ -9,7 +9,6 @@ using IronPython.Hosting;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Hosting;
 using MiracleMileAPI.Filters;
 using MiracleMileAPI.Http;
 using MiracleMileAPI.Model;
@@ -24,8 +23,8 @@ namespace MiracleMileAPI.Controllers
     public class AuthenticateController : ControllerBase
     {
         MakeHttpRequest MakeHttpRequest;
-        private readonly IWebHostEnvironment _hostingEnvironment;
-        public AuthenticateController(IHttpClientFactory clientFactory, IWebHostEnvironment hostingEnvironment)
+        private readonly IHostingEnvironment _hostingEnvironment;
+        public AuthenticateController(IHttpClientFactory clientFactory, IHostingEnvironment hostingEnvironment)
         {
             _hostingEnvironment = hostingEnvironment;
             MakeHttpRequest = new MakeHttpRequest(clientFactory);
@@ -141,9 +140,11 @@ namespace MiracleMileAPI.Controllers
             var socialSecurityNumber = TokenData.GetClaimByKey(authHeaderToken, "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
             var surname = TokenData.GetClaimByKey(authHeaderToken, "surname");
             var givenName = TokenData.GetClaimByKey(authHeaderToken, "givenname");
+            var id = Convert.ToInt32(TokenData.GetClaimByKey(authHeaderToken, "id"));
             var name = givenName + " " + surname;
 
             var user = new User() {
+                 Id = id,
                  Name = name,
                  Surname = surname,
                 GivenName = givenName,

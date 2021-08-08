@@ -359,7 +359,7 @@ namespace MiracleMileAPI.Controllers
         private void ReplyToMessageRoom(int myUser, int messagRoomId, string messageName, string messageText)
         {
 
-            if (CheckIfMessageRoomPrivate(myUser, messagRoomId))
+            /*if (CheckIfMessageRoomPrivate(myUser, messagRoomId))
             {
                 if (CheckIfUserExistMessageRoom(myUser, messagRoomId))
                 {
@@ -377,7 +377,7 @@ namespace MiracleMileAPI.Controllers
 
                 CreateMessages(myUser, messagRoomId, messageName, messageText);
 
-            }
+            }*/
 
 
 
