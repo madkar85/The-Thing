@@ -5,6 +5,7 @@ import { MainViewComponent } from './main-view.component';
 import { AuthGuardService } from '../Service/auth-guard.service';
 
 const routes: Routes = [
+
    { path: '', component: MainViewComponent,
    children: [
      // tslint:disable-next-line: max-line-length
@@ -18,6 +19,7 @@ const routes: Routes = [
      // tslint:disable-next-line: max-line-length
      { path: 'animalProfile', loadChildren: () => import('../animal-profile/animal-profile.module').then(m => m.AnimalProfileModule), canActivate: [AuthGuardService] },
    ] }
+   
 ];
 
 @NgModule({
