@@ -8,9 +8,10 @@ export class Animal {
     public gender: string;
     public size: string;
     public description: string;
-    public photo: string;
+    public photo: string|any ;
     public ownerId: number;
     public ownerSocialSecurityNumber: string;
+    public certificate: string|any ;
 
     constructor(data: Partial<Animal>) {
         Object.assign(this, data);
@@ -26,9 +27,10 @@ export class Animal {
             gender: '',
             size: '',
             description: '',
-            photo: '',
+            photo: null,
             ownerId: 0,
             ownerSocialSecurityNumber: '',
+            certificate: null,
         });
     }
 

@@ -13,7 +13,7 @@ export class MenuComponent implements OnInit {
 
   constructor(private router: Router, private userService: UserService, private authenticationService: AuthenticationService) { }
 
-  public pathItem: string[] = ['/mainView/aktiebolag', '/mainView/enskildfirma', '/mainView/userSettings', '/mainView/animalOverview', '/mainView/animalProfile'];
+  public pathItem: string[] = ['/mainView/aktiebolag', '/mainView/enskildfirma', '/mainView/userSettings', '/mainView/animalOverview', '/mainView/animalProfile', '/mainView/animalMarket'];
   public userName: string;
   ngOnInit() {
 

@@ -1,0 +1,27 @@
+<div class="row" style="margin-top:15px;">
+  <div *ngIf="!enableUploadManyFiles" class="col">
+    <input type="file" #file placeholder="Choose file" multiple (change)="selectFiles($event)" style="display:none;" />
+    <button type="button" class="btn btn-success" (click)="file.click()">{{buttonLabel}}</button>
+    <label class="btn btn-default">{{ choosesFiles }}
+    </label>
+  </div>
+  <div *ngIf="enableUploadManyFiles" class="col">
+    <input type="file" #files placeholder="Choose file" multiple (change)="uploadFiles($event)" style="display:none;" />
+    <button type="button" class="btn btn-success" (click)="files.click()">Ladda flera bilder</button>
+    <label class="btn btn-default">{{ choosesFiles }}
+    </label>
+  </div>
+</div>
+
+<div class="row" style="margin-top:15px;">
+  <div class="col">
+    <img [src]="imgURL" *ngIf="imgURL" />
+  </div>
+</div>
+<div class="image-row">
+  <div class="image-column" *ngFor="let file of fileInfos; let i = index">
+    <span class="close-delete cursor" (click)="DeleteUploadFile(file.id)">&times;</span>
+    <img src="{{file.url}}" class="hover-shadow cursor">
+  </div>
+
+</div>

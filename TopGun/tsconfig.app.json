@@ -13,7 +13,8 @@
   },
   "files": [
     "src/main.ts",
-    "src/polyfills.ts"
+    "src/polyfills.ts",
+    "src/app/service/generic-http.service.ts"
   ],
   "include": [
     "src/**/*.d.ts"

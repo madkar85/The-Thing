@@ -42,13 +42,7 @@ export class LoginComponent implements OnInit {
 
   public login(): void {
 
-    /*this.authenticationService.getDog().subscribe((res) => {
 
-      console.info('-----dog-----');
-      console.info(res);
-
-
-    });*/
     
     this.authenticationService.getAuthentication(this.loginData).subscribe((res) => {
 

@@ -1,0 +1,29 @@
+img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .btn-success{
+    background-color: #39d0b9;
+     border-color: #39d0b9;
+  }
+
+  .btn-success:hover {
+    background-color: #38bda9;
+  }
+
+  .close-delete {
+    /* color: white; */
+    /* position: absolute; */
+    top: 90px;
+    right: 25px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.close-delete:hover,
+  .close-delete:focus {
+    color: #888888;
+    text-decoration: none;
+    cursor: pointer;
+  }

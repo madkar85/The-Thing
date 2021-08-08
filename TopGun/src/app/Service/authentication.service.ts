@@ -76,15 +76,6 @@ export class AuthenticationService {
     return this.genericHttpService.post<any>(url, logindata);
   }
 
-
- /* public getDog(): Observable<any> {
-    var dogData = '{"txtRegnr":"SE35276/2018","txtIDnummer":"","txtChipnr":"","txtHundnamn":"","ddlRasIn":"","ddlKon":"","txtLicensnr":""}';
-
-    const url = 'https://hundar.skk.se/hunddata/Hund_sok.aspx/HundData';
-
-    return this.genericHttpService.post<any>(url, dogData);
-  }*/
-
   public parseJwt(token: any) {
     const base64Url = token.split('.')[1];
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -106,6 +97,8 @@ export class AuthenticationService {
   // displays message before logging out as well, check if users are active and renews the token if user is aktiv
 
   startCountingDown() {
+    console.info('token');
+    console.info(this.getToken);
 
     // review this feature maybe better to use an Interval timer that check every 20 seconds if token valid
     const expirationDate = this.getTokenExpirationDate();
@@ -219,8 +212,6 @@ export class AuthenticationService {
     this.cleanTokenData();
     this.router.navigate(['/login']);
   }
-
-
 
 
 }
