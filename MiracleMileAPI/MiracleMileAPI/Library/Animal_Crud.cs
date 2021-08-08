@@ -25,7 +25,7 @@ namespace MiracleMileAPI.Library
         public List<Animal> GetAnimals()
         {
             string file = this.GetFilePath();
-            var animalList = File.ReadAllText(file);
+            var animalList = System.IO.File.ReadAllText(file);
             List<Animal> jsonObject = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Animal>>(animalList);
             return jsonObject;
         }
@@ -54,7 +54,7 @@ namespace MiracleMileAPI.Library
             var jsonData = JsonConvert.SerializeObject(jsonList);
             string file = this.GetFilePath();
 
-            File.WriteAllText(file, jsonData);
+            System.IO.File.WriteAllText(file, jsonData);
             return animal;
         }
 
@@ -78,7 +78,7 @@ namespace MiracleMileAPI.Library
               }).ToList();
             var jsonData = JsonConvert.SerializeObject(animales);
             string file = this.GetFilePath();
-            File.WriteAllText(file, jsonData);
+            System.IO.File.WriteAllText(file, jsonData);
             return animal;
         }
         public void DeleteAnimal(int id)
@@ -89,7 +89,7 @@ namespace MiracleMileAPI.Library
                 animales.RemoveAll(x => x.Id == id);
                 var jsonData = JsonConvert.SerializeObject(animales);
                 string file = this.GetFilePath();
-                File.WriteAllText(file, jsonData);
+                System.IO.File.WriteAllText(file, jsonData);
             }
             catch (Exception)
             {

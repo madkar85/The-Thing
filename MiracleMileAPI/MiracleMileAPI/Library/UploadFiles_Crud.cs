@@ -28,7 +28,7 @@ namespace MiracleMileAPI.Library
             try
             {
                 string file = this.GetFilePath();
-                var json = File.ReadAllText(file);
+                var json = System.IO.File.ReadAllText(file);
                 var jObject = JObject.Parse(json);
                 JArray uploadFileList = (JArray)jObject["uploadFiles"];
                 List<UploadFile> results = JsonConvert.DeserializeObject<List<UploadFile>>(jObject.GetValue("uploadFiles").ToString());
@@ -42,7 +42,7 @@ namespace MiracleMileAPI.Library
 
                     uploadFileList.Remove(companyToDeleted);
                     string output = Newtonsoft.Json.JsonConvert.SerializeObject(jObject, Newtonsoft.Json.Formatting.Indented);
-                    File.WriteAllText(file, output);
+                    System.IO.File.WriteAllText(file, output);
                 }
                 else
                 {
@@ -58,7 +58,7 @@ namespace MiracleMileAPI.Library
         public List<UploadFile> GetUploadFiles(int id)
         {
             string file = this.GetFilePath();
-            var json = File.ReadAllText(file);
+            var json = System.IO.File.ReadAllText(file);
             var jsonObj = JObject.Parse(json);
             var heroList = jsonObj.GetValue("uploadFiles");
             List<UploadFile> uploadFilesResult = new List<UploadFile>();
@@ -82,7 +82,7 @@ namespace MiracleMileAPI.Library
         public List<UploadFile> Getheros()
         {
             string file = this.GetFilePath();
-            var json = File.ReadAllText(file);
+            var json = System.IO.File.ReadAllText(file);
             var jsonObj = JObject.Parse(json);
             return JsonConvert.DeserializeObject<List<UploadFile>>(jsonObj.GetValue("uploadFiles").ToString());
         }
@@ -93,7 +93,7 @@ namespace MiracleMileAPI.Library
             try
             {
                 string file = this.GetFilePath();
-                var json = File.ReadAllText(file);
+                var json = System.IO.File.ReadAllText(file);
                 var jsonObj = JObject.Parse(json);
                 var uploadFileUploadList = jsonObj.GetValue("uploadFiles") as JArray;
                 List<UploadFile> results = JsonConvert.DeserializeObject<List<UploadFile>>(jsonObj.GetValue("uploadFiles").ToString());
@@ -105,7 +105,7 @@ namespace MiracleMileAPI.Library
 
                     jsonObj["uploadFiles"] = uploadFileUploadList;
                     string newJsonResult = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObj, Newtonsoft.Json.Formatting.Indented);
-                    File.WriteAllText(file, newJsonResult);
+                    System.IO.File.WriteAllText(file, newJsonResult);
                 }
             }
             catch (Exception ex)
@@ -120,7 +120,7 @@ namespace MiracleMileAPI.Library
             try
             {
                 string file = this.GetFilePath();
-                var json = File.ReadAllText(file);
+                var json = System.IO.File.ReadAllText(file);
                 var jsonObj = JObject.Parse(json);
                 var uploadFileUploadList = jsonObj.GetValue("uploadFiles") as JArray;
                 List<UploadFile> results = JsonConvert.DeserializeObject<List<UploadFile>>(jsonObj.GetValue("uploadFiles").ToString());
@@ -135,7 +135,7 @@ namespace MiracleMileAPI.Library
 
                     jsonObj["uploadFiles"] = uploadFileUploadList;
                     string newJsonResult = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObj, Newtonsoft.Json.Formatting.Indented);
-                    File.WriteAllText(file, newJsonResult);
+                    System.IO.File.WriteAllText(file, newJsonResult);
                 }
             }
             catch (Exception ex)
@@ -146,7 +146,7 @@ namespace MiracleMileAPI.Library
         }
         public void DeliteFileFromMap(string url)
         {
-            File.Delete(url);
+            System.IO.File.Delete(url);
         }
 
         public string GetFilePath()
