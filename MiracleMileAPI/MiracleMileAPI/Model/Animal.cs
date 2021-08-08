@@ -16,7 +16,8 @@ namespace MiracleMileAPI.Model
         public string Size { get; set; }
         public string Description { get; set; }
         public string Photo { get; set; }
-        public int OwnerId { get; set; }
+         public string Certificate { get; set; }
+         public int OwnerId { get; set; }
         public string OwnerSocialSecurityNumber { get; set; }
 
     }

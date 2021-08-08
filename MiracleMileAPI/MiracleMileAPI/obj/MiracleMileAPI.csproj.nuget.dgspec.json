@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Code\\The-Thing\\MiracleMileAPI\\MiracleMileAPI\\MiracleMileAPI.csproj": {}
+    "D:\\Code\\percy code\\back-end\\MiracleMileAPI\\MiracleMileAPI\\MiracleMileAPI.csproj": {}
   },
   "projects": {
-    "D:\\Code\\The-Thing\\MiracleMileAPI\\MiracleMileAPI\\MiracleMileAPI.csproj": {
+    "D:\\Code\\percy code\\back-end\\MiracleMileAPI\\MiracleMileAPI\\MiracleMileAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Code\\The-Thing\\MiracleMileAPI\\MiracleMileAPI\\MiracleMileAPI.csproj",
+        "projectUniqueName": "D:\\Code\\percy code\\back-end\\MiracleMileAPI\\MiracleMileAPI\\MiracleMileAPI.csproj",
         "projectName": "MiracleMileAPI",
-        "projectPath": "D:\\Code\\The-Thing\\MiracleMileAPI\\MiracleMileAPI\\MiracleMileAPI.csproj",
+        "projectPath": "D:\\Code\\percy code\\back-end\\MiracleMileAPI\\MiracleMileAPI\\MiracleMileAPI.csproj",
         "packagesPath": "C:\\Users\\Marco\\.nuget\\packages\\",
-        "outputPath": "D:\\Code\\The-Thing\\MiracleMileAPI\\MiracleMileAPI\\obj\\",
+        "outputPath": "D:\\Code\\percy code\\back-end\\MiracleMileAPI\\MiracleMileAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Marco\\AppData\\Roaming\\NuGet\\NuGet.Config",
