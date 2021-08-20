@@ -10,8 +10,9 @@ const routes: Routes = [
   // tslint:disable-next-line: max-line-length
   { path: 'mainView', loadChildren: () => import('./main-view/main-view.module').then(m => m.MainViewModule), canActivate: [AuthGuardService] },
   { path: 'register', loadChildren: () => import('./register/register.module').then(m => m.RegisterModule) },
-  { path: 'AnimalMarket', loadChildren: () => import('./animal-market/animal-market.module').then(m => m.AnimalMarketModule) },
-  { path: 'animalProfile', loadChildren: () => import('./animal-overview/animal-overview.module').then(m => m.AnimalOverviewModule) },
+ /* { path: 'AnimalMarket', loadChildren: () => import('./animal-market/animal-market.module').then(m => m.AnimalMarketModule) },
+  { path: 'animalProfile', loadChildren: () => import('./animal-overview/animal-overview.module').then(m => m.AnimalOverviewModule) },*/
+  { path: 'animalMappTest', loadChildren: () => import('./animal-map/animal-map.module').then(m => m.AnimalMapModule) },
 ];
 
 @NgModule({

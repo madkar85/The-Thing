@@ -4,6 +4,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpInterceptorService } from './Service/http-interceptor.service';
+import { AnimalMapComponent } from './animal-map/animal-map.component';
 //import { ImageModalComponent } from './components/image-modal/image-modal.component';
 //import { ImageLightboxComponent } from '../components/image-liox.component';
 //import { UploadFilesComponent } from './components/upload-files/upload-files.component';
@@ -11,7 +12,8 @@ import { HttpInterceptorService } from './Service/http-interceptor.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AnimalMapComponent
   ],
   imports: [
     BrowserModule,

@@ -14,7 +14,9 @@ const routes: Routes = [
      // tslint:disable-next-line: max-line-length
      { path: 'animalProfile', loadChildren: () => import('../animal-profile/animal-profile.module').then(m => m.AnimalProfileModule), canActivate: [AuthGuardService] },
      // tslint:disable-next-line: max-line-length
-     { path: 'animalMarket', loadChildren: () => import('../animal-market/animal-market.module').then(m => m.AnimalMarketModule), canActivate: [AuthGuardService] }
+     { path: 'animalMarket', loadChildren: () => import('../animal-market/animal-market.module').then(m => m.AnimalMarketModule), canActivate: [AuthGuardService] },
+
+     { path: 'animalMapp', loadChildren: () => import('../animal-map/animal-map.module').then(m => m.AnimalMapModule), canActivate: [AuthGuardService] },
    ] }
 ];
 
