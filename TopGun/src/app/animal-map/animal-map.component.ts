@@ -23,37 +23,74 @@ export class AnimalMapComponent implements OnInit {
 
   @ViewChild('popup', { static: true }) popupElement: ElementRef;
   public map: Map;
+  public vectorSource = new VectorSource();
+  public vectorLayer = new VectorLayer();
   
-  public iconFeature = new Feature({
-  geometry: new Point([14, 18]),
-  name: 'Marco Island',
-  population: 4000,
-  rainfall: 500,
-});
 
-public iconStyle = new Style({
-  image: new Icon({
-    anchor: [0.5, 46],
-    anchorXUnits: 'fraction',
-    anchorYUnits: 'pixels',
-    src: 'https://openlayers.org/en/latest/examples/data/icon.png',
-  }),
-});
-
-public vectorSource = new VectorSource({
-  features: [this.iconFeature],
-});
-
-public vectorLayer = new VectorLayer({
-  source: this.vectorSource,
-});
 
 
   ngOnInit(): void {
 
-    
+    this.addMarkers();
     this.creatMap();
     this.addPopup();
+  }
+
+
+  addMarkers(){
+
+    let mapMarkList = [];
+
+   var markers = [
+    {longitud: 9.2, latitud: 48.8, name: 'Cities1', description: " test test test", like: 10},
+    {longitud: 8.4, latitud: 49.0, name: 'Cities2', description: " test test test", like: 9},
+    {longitud: 6.2, latitud: 48.7, name: 'Cities3', description: " test test test", like: 8},
+    {longitud: 2.5, latitud: 48.9, name: 'Cities4', description: " test test test", like: 7},
+    {longitud: -1.4, latitud: 50.9, name: 'Cities5', description: " test test test", like: 6},
+    {longitud: 6.6, latitud: 51.8, name: 'Citiess6', description: " test test test", like: 5},
+    {longitud: 8.6, latitud:  49.4, name: 'Cities7', description: " test test test", like: 4},
+    {longitud: 11.6, latitud:  48.1, name: 'Cities8', description: " test test test", like: 2}
+  ];
+
+  for (let mark of markers) {
+    console.log(mark); // 1, "string", false
+
+    let iconFeature = new Feature({
+      geometry: new Point(olProj.fromLonLat([mark.longitud, mark.latitud])),
+      name: mark.name,
+      description: mark.description,
+      like: mark.like,
+      population: 4000,
+      rainfall: 500,
+    });
+    
+    let iconStyle = new Style({
+      image: new Icon({
+        anchor: [0.5, 46],
+        anchorXUnits: 'fraction',
+        anchorYUnits: 'pixels',
+        src: 'https://openlayers.org/en/latest/examples/data/icon.png',
+      }),
+    });
+  
+    iconFeature.setStyle(iconStyle);
+
+    mapMarkList.push(iconFeature);
+
+  }
+
+
+
+  this.vectorSource = new VectorSource({
+    features: mapMarkList,
+  });
+  
+  this.vectorLayer = new VectorLayer({
+    source: this.vectorSource,
+  });
+  
+
+
   }
 
 
@@ -87,8 +124,11 @@ this.map.on('click', (evt) => {
       content: feature.get('name'),
     });
     element.popover('show');*/
-
+  
     console.info("open box " + evt.coordinate)
+    console.info(feature.get('name'))
+    console.info(feature.get('description'))
+    console.info(feature.get('like'))
   } else {
     //element.popover('dispose');
     console.info("close box " + evt.coordinate)
@@ -113,7 +153,7 @@ this.map.on('movestart', () => {
 
   creatMap(){
 
-    this.iconFeature.setStyle(this.iconStyle);
+    
 
     this.map = new Map({
       target: 'map',
@@ -124,7 +164,7 @@ this.map.on('movestart', () => {
       ],
       view: new View({
         center: olProj.fromLonLat([18.643501, 60.128161]),
-        zoom: 2
+        zoom: 5
       })
     });
 
