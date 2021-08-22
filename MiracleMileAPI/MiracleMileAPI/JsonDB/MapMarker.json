@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "longitud": 9.2,
+    "latitud": 48.8,
+    "name": "Cities1",
+    "description": " test test test",
+  },
+  {
+    "id": 2,
+    "longitud": 8.4,
+    "latitud": 49.0,
+    "name": "Cities2",
+    "description": " test test test",
+  },
+  {
+    "id": 3,
+    "longitud": 6.2,
+    "latitud": 48.7,
+    "name": "Cities3",
+    "description": " test test test",
+  },
+  {
+    "id": 4,
+    "longitud": 2.5,
+    "latitud": 48.9,
+    "name": "Cities4",
+    "description": " test test test",
+  },
+  {
+    "id": 5,
+    "longitud": -1.4,
+    "latitud": 50.9,
+    "name": "Cities5",
+    "description": " test test test",
+  },
+  {
+    "id": 6,
+    "longitud": 6.6,
+    "latitud": 51.8,
+    "name": "Citiess6",
+    "description": " test test test",
+  },
+  {
+    "id": 7,
+    "longitud": 8.6,
+    "latitud": 49.4,
+    "name": "Cities7",
+    "description": " test test test",
+  },
+  {
+    "id": 8,
+    "longitud": 11.6,
+    "latitud": 48.1,
+    "name": "Cities8",
+    "description": " test test test",
+  }
+]

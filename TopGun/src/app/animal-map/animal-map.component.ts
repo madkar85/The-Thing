@@ -11,6 +11,9 @@ import VectorSource from 'ol/source/Vector';
 import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
 import { Overlay } from 'ol';
+import { MapService } from '../Service/map.service';
+import { MapMarker } from '../model/map-marker';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-animal-map',
@@ -19,45 +22,56 @@ import { Overlay } from 'ol';
 })
 export class AnimalMapComponent implements OnInit {
 
-  constructor() { }
+  constructor(private mapService: MapService) { }
 
   @ViewChild('popup', { static: true }) popupElement: ElementRef;
   public map: Map;
   public vectorSource = new VectorSource();
   public vectorLayer = new VectorLayer();
-  
+  public markers: any;
+  public MarkerInfo = MapMarker.empty();
+  public showInfoBox = false;
 
+  @ViewChild('mapForm', { static: false }) registerForm: NgForm;
 
 
   ngOnInit(): void {
 
-    this.addMarkers();
-    this.creatMap();
-    this.addPopup();
+    if(this.mapService.checkMapMarkerLis()){
+      this.mapService.getAllMapMarkers();
+      }
+  
+      this.mapService.currentMapMarkerList.subscribe(mapMarkerListData => {
+        console.info('Marker test' + Object.keys(mapMarkerListData).length);
+
+        if (mapMarkerListData.length != 0) {
+          this.markers = mapMarkerListData;
+          this.addMarkers();
+          this.creatMap();
+          this.addPopup();
+        }
+  
+
+  
+      });
+
   }
+
 
 
   addMarkers(){
 
     let mapMarkList = [];
 
-   var markers = [
-    {longitud: 9.2, latitud: 48.8, name: 'Cities1', description: " test test test", like: 10},
-    {longitud: 8.4, latitud: 49.0, name: 'Cities2', description: " test test test", like: 9},
-    {longitud: 6.2, latitud: 48.7, name: 'Cities3', description: " test test test", like: 8},
-    {longitud: 2.5, latitud: 48.9, name: 'Cities4', description: " test test test", like: 7},
-    {longitud: -1.4, latitud: 50.9, name: 'Cities5', description: " test test test", like: 6},
-    {longitud: 6.6, latitud: 51.8, name: 'Citiess6', description: " test test test", like: 5},
-    {longitud: 8.6, latitud:  49.4, name: 'Cities7', description: " test test test", like: 4},
-    {longitud: 11.6, latitud:  48.1, name: 'Cities8', description: " test test test", like: 2}
-  ];
-
-  for (let mark of markers) {
+  for (let mark of this.markers) {
     console.log(mark); // 1, "string", false
 
     let iconFeature = new Feature({
       geometry: new Point(olProj.fromLonLat([mark.longitud, mark.latitud])),
+      id: mark.id,
       name: mark.name,
+      longitud: mark.longitud,
+      latitud: mark.latitud,
       description: mark.description,
       like: mark.like,
       population: 4000,
@@ -101,15 +115,6 @@ export class AnimalMapComponent implements OnInit {
     console.info(this.popupElement.nativeElement)
     console.info(this.popupElement)
 
-    let element = this.popupElement.nativeElement;
-  
-const popupBox = new Overlay({
-      element: element,
-      positioning: 'bottom-center',
-      stopEvent: false,
-    });
-
-    this.map.addOverlay(popupBox);
 
         // display popup on click
 this.map.on('click', (evt) => {
@@ -124,13 +129,19 @@ this.map.on('click', (evt) => {
       content: feature.get('name'),
     });
     element.popover('show');*/
-  
-    console.info("open box " + evt.coordinate)
-    console.info(feature.get('name'))
-    console.info(feature.get('description'))
-    console.info(feature.get('like'))
+    console.info("test");
+    this.showInfoBox = true;
+
+    this.MarkerInfo.id = feature.get('id');
+    this.MarkerInfo.Name = feature.get('name');
+    this.MarkerInfo.Latitud = feature.get('Latitud');
+    this.MarkerInfo.Longitud = feature.get('Longitud');
+    this.MarkerInfo.Description = feature.get('description');
+    
+
   } else {
     //element.popover('dispose');
+    this.showInfoBox= false;
     console.info("close box " + evt.coordinate)
   }
 });
@@ -146,6 +157,7 @@ this.map.on('pointermove', (e) => {
 this.map.on('movestart', () => {
   //element.popover('dispose');
   console.info("close box on move" )
+  this.showInfoBox= false;
 });
   
   }

@@ -28,9 +28,14 @@ export class GenericHttpService {
   }
 
 
-  get<T>(url: string, item: T): Observable<T> {
+  getBy<T>(url: string, item: T): Observable<T> {
 
     return this.httpClient.get<T>(url, item);
+  }
+  
+  getAll<T>(url: string): Observable<T> {
+
+    return this.httpClient.get<T>(url);
   }
 
   delete<T>(url: string, item: T) {

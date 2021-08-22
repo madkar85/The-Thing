@@ -11,6 +11,7 @@ namespace MiracleMileAPI.Model
         public int UserId { get; set; }
         public int MessageRoomId { get; set; }
         public int MessageId { get; set; }
+        public int MapMarkerId { get; set; }
         public bool Active { get; set; }
         public DateTime Created { get; set; }
     }

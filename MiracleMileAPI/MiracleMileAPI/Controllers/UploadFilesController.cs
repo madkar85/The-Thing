@@ -36,7 +36,7 @@ namespace MiracleMileAPI.Controllers
     {
       //return new string[] { "value1", "value2" };
       
-      UploadFiles_Crud uploadFiles = new UploadFiles_Crud(_hostingEnvironment);
+      UploadFileCrud uploadFiles = new UploadFileCrud(_hostingEnvironment);
       return uploadFiles.GetUploadFiles(id);
     }
 
@@ -57,7 +57,7 @@ namespace MiracleMileAPI.Controllers
     public UploadFile SaveUpload([FromBody] UploadFile uploadFile)
     {
       //Animal_Crud animalCrud = new Animal_Crud(_hostingEnvironment);
-      UploadFiles_Crud uploadFiles = new UploadFiles_Crud(_hostingEnvironment);
+      UploadFileCrud uploadFiles = new UploadFileCrud(_hostingEnvironment);
       //return uploadFiles.CreateAnimal(animal)
       return uploadFiles.UpdateUploadFiles(uploadFile);
     }
@@ -75,7 +75,7 @@ namespace MiracleMileAPI.Controllers
           var fullPath = Path.Combine(pathToSave, fileName);
           var dbPath = Path.Combine(folderName, fileName);
 
-          UploadFiles_Crud uploadFiles = new UploadFiles_Crud(_hostingEnvironment);
+          UploadFileCrud uploadFiles = new UploadFileCrud(_hostingEnvironment);
           uploadFiles.AddUploadFiles(new UploadFile() { Id = id.ToString(), Name = fileName, Url = fullPath, AnimalId ="0" });
 
 
@@ -100,7 +100,7 @@ namespace MiracleMileAPI.Controllers
     [HttpGet("DeleteUploadFile/{fileId}")]
     public void DeleteUploadFile(int fileId = 0)
     {
-      UploadFiles_Crud uploadFiles = new UploadFiles_Crud(_hostingEnvironment);
+      UploadFileCrud uploadFiles = new UploadFileCrud(_hostingEnvironment);
       uploadFiles.DeleteUploadFile(fileId);
     }
     //// PUT: api/UploadFiles/5

@@ -254,3 +254,4 @@ D:\Code\The-Thing\MiracleMileAPI\MiracleMileAPI\obj\Debug\netcoreapp3.0\scopedcs
 D:\Code\The-Thing\MiracleMileAPI\MiracleMileAPI\obj\Debug\netcoreapp3.0\MiracleMileAPI.RazorTargetAssemblyInfo.cache
 D:\Code\The-Thing\MiracleMileAPI\MiracleMileAPI\obj\Debug\netcoreapp3.0\MiracleMileAPI.csproj.CopyComplete
 D:\Code\The-Thing\MiracleMileAPI\MiracleMileAPI\obj\Debug\netcoreapp3.0\MiracleMileAPI.genruntimeconfig.cache
+D:\Code\The-Thing\MiracleMileAPI\MiracleMileAPI\bin\Debug\netcoreapp3.0\JsonDB\MapMarker.json

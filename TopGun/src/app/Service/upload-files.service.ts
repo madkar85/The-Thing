@@ -61,7 +61,7 @@ export class UploadFilesService {
 
   DeleteUploadFile(fileId: number) {
     const url = `${this.baseUrl}/DeleteUploadFile/${fileId}`;
-    const updatedAnimals = this.genericHttpService.get(url, [])
+    const updatedAnimals = this.genericHttpService.getBy(url, [])
     //.subscribe(data=>{data;})
     updatedAnimals.subscribe();
     return updatedAnimals;
@@ -70,7 +70,7 @@ export class UploadFilesService {
   getFiles(filesId: number) {
 
     const url = `${this.baseUrl}/files/${filesId}`;
-    const uploadfiles = this.genericHttpService.get(url, [])
+    const uploadfiles = this.genericHttpService.getBy(url, [])
     uploadfiles.subscribe({
       next: (updated) => this.uploadFilesSource.next(updated)
     });

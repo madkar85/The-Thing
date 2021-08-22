@@ -11,22 +11,20 @@ using System.Threading.Tasks;
 
 namespace MiracleMileAPI.Library
 {
-    public class Animal_Crud
+    public class AnimalCrud
     {
-        private readonly IWebHostEnvironment _hostingEnvironment;
+        private WorkWithJsonFile workWithJsonFile;
 
-
-        public Animal_Crud(IWebHostEnvironment hostingEnvironment)
+        public AnimalCrud(string contentRootPath)
         {
-            _hostingEnvironment = hostingEnvironment;
+
+            workWithJsonFile = new WorkWithJsonFile(contentRootPath);
 
         }
 
         public List<Animal> GetAnimals()
         {
-            string file = this.GetFilePath();
-            var animalList = System.IO.File.ReadAllText(file);
-            List<Animal> jsonObject = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Animal>>(animalList);
+            List<Animal> jsonObject = workWithJsonFile.GetJsonData<Animal>("Animal");
             return jsonObject;
         }
         public List<Animal> GetAnimalsByOwnerId(int ownerId)
@@ -51,10 +49,8 @@ namespace MiracleMileAPI.Library
 
             jsonList.Add(animal);
 
-            var jsonData = JsonConvert.SerializeObject(jsonList);
-            string file = this.GetFilePath();
+            workWithJsonFile.AddJsonData<Animal>("Animal", jsonList);
 
-            System.IO.File.WriteAllText(file, jsonData);
             return animal;
         }
 
@@ -76,9 +72,9 @@ namespace MiracleMileAPI.Library
                   S.OwnerId = animal.OwnerId;
                   return S;
               }).ToList();
-            var jsonData = JsonConvert.SerializeObject(animales);
-            string file = this.GetFilePath();
-            System.IO.File.WriteAllText(file, jsonData);
+
+            workWithJsonFile.AddJsonData<Animal>("Animal", animales);
+
             return animal;
         }
         public void DeleteAnimal(int id)
@@ -87,21 +83,14 @@ namespace MiracleMileAPI.Library
             {
                 var animales = GetAnimals().ToList();
                 animales.RemoveAll(x => x.Id == id);
-                var jsonData = JsonConvert.SerializeObject(animales);
-                string file = this.GetFilePath();
-                System.IO.File.WriteAllText(file, jsonData);
+
+                workWithJsonFile.AddJsonData<Animal>("Animal", animales);
             }
             catch (Exception)
             {
 
                 throw;
             }
-        }
-
-        public string GetFilePath()
-        {
-            var contentRootPath = _hostingEnvironment.ContentRootPath;
-            return $@"{contentRootPath}/JsonDB/Animal.json";
         }
 
     }

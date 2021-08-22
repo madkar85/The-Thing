@@ -11,14 +11,14 @@ using System.Threading.Tasks;
 
 namespace MiracleMileAPI.Library
 {
-    public class UploadFiles_Crud
+    public class UploadFileCrud
     {
 
 
         private readonly IWebHostEnvironment _hostingEnvironment;
 
 
-        public UploadFiles_Crud(IWebHostEnvironment hostingEnvironment)
+        public UploadFileCrud(IWebHostEnvironment hostingEnvironment)
         {
             _hostingEnvironment = hostingEnvironment;
 

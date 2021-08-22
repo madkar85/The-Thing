@@ -1,3 +1,74 @@
-{
-
-}
+[
+  {
+    "id": 1,
+    "UserId": 1,
+    "MessageRoomId": null,
+    "MessageId": null,
+    "MapMarkerId": 1,
+    "Active": true,
+    "Created": "2021-08-22"
+  },
+  {
+    "id": 2,
+    "UserId": 2,
+    "MessageRoomId": null,
+    "MessageId": null,
+    "MapMarkerId": 1,
+    "Active": true,
+    "Created": "2021-08-22"
+  },
+  {
+    "id": 3,
+    "UserId": 3,
+    "MessageRoomId": null,
+    "MessageId": null,
+    "MapMarkerId": 1,
+    "Active": true,
+    "Created": "2021-08-22"
+  },
+  {
+    "id": 4,
+    "UserId": 2,
+    "MessageRoomId": null,
+    "MessageId": null,
+    "MapMarkerId": 2,
+    "Active": true,
+    "Created": "2021-08-22"
+  },
+  {
+    "id": 5,
+    "UserId": 2,
+    "MessageRoomId": null,
+    "MessageId": null,
+    "MapMarkerId": 3,
+    "Active": true,
+    "Created": "2021-08-22"
+  },
+  {
+    "id": 6,
+    "UserId": 1,
+    "MessageRoomId": null,
+    "MessageId": null,
+    "MapMarkerId": 3,
+    "Active": true,
+    "Created": "2021-08-22"
+  },
+  {
+    "id": 7,
+    "UserId": 3,
+    "MessageRoomId": null,
+    "MessageId": null,
+    "MapMarkerId": 5,
+    "Active": true,
+    "Created": "2021-08-22"
+  },
+  {
+    "id": 8,
+    "UserId": 1,
+    "MessageRoomId": null,
+    "MessageId": null,
+    "MapMarkerId": 6,
+    "Active": true,
+    "Created": "2021-08-22"
+  }
+]

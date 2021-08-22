@@ -16,12 +16,13 @@ namespace MiracleMileAPI.Controllers
   [ApiController]
   public class AnimalController : ControllerBase
     {
-    private readonly IWebHostEnvironment _hostingEnvironment;
 
+        private AnimalCrud animalCrud;
 
-    public AnimalController(IWebHostEnvironment hostingEnvironment)
+        public AnimalController(IWebHostEnvironment hostingEnvironment)
     {
-      _hostingEnvironment = hostingEnvironment;
+   
+      animalCrud = new AnimalCrud(hostingEnvironment.ContentRootPath);
 
     }
     // GET: api/Animal
@@ -93,21 +94,21 @@ namespace MiracleMileAPI.Controllers
     [HttpGet("GetAnimales/{ownerId}")]
         public IEnumerable<Animal> GetAnimales(int ownerId = 0)
         {
-            Animal_Crud animalCrud = new Animal_Crud(_hostingEnvironment);
+            
           return animalCrud.GetAnimalsByOwnerId(ownerId);
         }
     // GET: api/Animal/5
     [HttpGet("GetAllAnimales")]
     public IEnumerable<Animal> GetAllAnimales()
     {
-      Animal_Crud animalCrud = new Animal_Crud(_hostingEnvironment);
+      
       return animalCrud.GetAnimals();
     }
     // POST: api/Animal
     [HttpPost("SaveAnimal")]
         public Animal SaveAnimal([FromBody] Animal animal)
         {
-          Animal_Crud animalCrud = new Animal_Crud(_hostingEnvironment);
+        
           if(animal.Id == 0)
           {
             return animalCrud.CreateAnimal(animal);
@@ -128,7 +129,6 @@ namespace MiracleMileAPI.Controllers
         public IEnumerable<Animal> DeleteAnimal(int AnimalId = 0)
         {
 
-          Animal_Crud animalCrud = new Animal_Crud(_hostingEnvironment);
           var deleteAnimal = animalCrud.GetAnimalById(AnimalId);
           animalCrud.DeleteAnimal(deleteAnimal.Id);
           return animalCrud.GetAnimalsByOwnerId(deleteAnimal.OwnerId);

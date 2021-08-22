@@ -13,7 +13,6 @@ import { AnimalMapComponent } from './animal-map/animal-map.component';
 @NgModule({
   declarations: [
     AppComponent,
-    AnimalMapComponent
   ],
   imports: [
     BrowserModule,
