@@ -16,9 +16,17 @@ export class AnimalOverviewComponent implements OnInit {
   ngOnInit(): void {
     this.ownerId = this.authenticationService.getDataFromToken('id');
     console.info(this.authenticationService.getToken());
-    this.animalProfileService.getAnimales(this.ownerId).subscribe(data => {
-      this.animales = data;
-    })
+    this.animalProfileService.getAnimales(this.ownerId);
+
+
+    this.animalProfileService.currentAnimals.subscribe(data => {
+
+      if (data) {
+        this.animales = data;
+      }
+
+    });
+
    /*  this.animalProfileService.currentAnimals.subscribe(data => {
       if (data) {
         this.animales = data;

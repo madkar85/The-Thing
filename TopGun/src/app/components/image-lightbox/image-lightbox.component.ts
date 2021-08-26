@@ -21,9 +21,15 @@ export class ImageLightboxComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.animalId != 0) {
-      this.uploadService.getFiles(this.animalId).subscribe(data => {
-        this.images = data;
-      })
+      this.uploadService.getFiles(this.animalId);
+
+      this.uploadService.currentUploadFiles.subscribe(data => {
+        if (data) {
+          this.images = data;
+        }
+  
+      });
+
     }
   }
 

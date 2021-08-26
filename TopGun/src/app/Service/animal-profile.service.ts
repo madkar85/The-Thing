@@ -33,14 +33,14 @@ public currentAnimalId: Observable<number> = this.animalIdSource.asObservable();
   private allAnimalsSource: BehaviorSubject<Animal[]> = new BehaviorSubject<Animal[]>([]);
   public allCurrentAnimals: Observable<Animal[]> = this.allAnimalsSource.asObservable();
 
-  private animalsTypes: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
-  public currentTypes: Observable<string[]> = this.animalsTypes.asObservable();
+  private animalsTypesSource: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+  public currentTypes: Observable<string[]> = this.animalsTypesSource.asObservable();
 
-  private animalsBreeds: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
-  public currentBreeds: Observable<string[]> = this.animalsBreeds.asObservable();
+  private animalsBreedsSource: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+  public currentBreeds: Observable<string[]> = this.animalsBreedsSource.asObservable();
 
-  private animalsGenders: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
-  public currentGenders: Observable<string[]> = this.animalsGenders.asObservable();
+  private animalsGendersSource: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+  public currentGenders: Observable<string[]> = this.animalsGendersSource.asObservable();
 
   saveAnimalProfile(animal: Animal): Observable<Animal> {
     const url = `${this.baseUrl}/SaveAnimal`;
@@ -66,50 +66,120 @@ public currentAnimalId: Observable<number> = this.animalIdSource.asObservable();
   //     next: (updated) => this.userSource.next(updated)
   //   });
   DeleteAnimal(AnimalId: number){
+
     const url = `${this.baseUrl}/DeleteAnimal`;
 
     const queryParams =  {AnimalId: AnimalId};
 
-    const updatedAnimals =  this.genericHttpService.get<[]>(url, queryParams);
-    updatedAnimals.subscribe({
-      next: (updated) => this.animalsSource.next(updated)
+    this.getData<[]>(url, queryParams).subscribe((res) => {
+
+      if (res) {
+        this.setAnimals(res);
+      }
+
     });
-    return updatedAnimals;
+
+
+  }
+
+  /**
+   * Get data
+   */
+   public getData<T>(url: string, QueryParams: object = {}): Observable<any> {
+
+    return this.genericHttpService.get<T>(url, QueryParams);
+    
+  }
+
+  public setAnimals(Animals: Animal[]) {
+
+    this.animalsSource.next(Animals);
+
+  }
+
+
+  public getAnimals() {
+
+    return this.animalsSource.value;
+
   }
 
   getAnimales(ownerId: number){
-    //const url = `${this.baseUrl}/GetAnimales/${ownerId}`;
+ 
     const url = `${this.baseUrl}/GetAnimales`;
 
     const queryParams =  {ownerId: ownerId};
 
-    const updatedAnimals =  this.genericHttpService.get<[]>(url, queryParams);
-    updatedAnimals.subscribe({
-      next: (updated) => this.animalsSource.next(updated)
+    this.getData<[]>(url, queryParams).subscribe((res) => {
+
+      if (res) {
+        this.setAnimals(res);
+      }
+
     });
-    return updatedAnimals;
+
   }
 
   getAllAnimales(){
+
     const url = `${this.baseUrl}/GetAllAnimales`;
-    const updatedAnimals =  this.genericHttpService.get<[]>(url);
-    updatedAnimals.subscribe({
-      next: (updated) => this.allAnimalsSource.next(updated)
+
+    this.getData<[]>(url).subscribe((res) => {
+
+      if (res) {
+        this.setallAnimals(res);
+      }
+
     });
-    return updatedAnimals;
+
+  }
+
+  public setallAnimals(Animals: Animal[]) {
+
+    this.allAnimalsSource.next(Animals);
+
+  }
+
+
+  public getallAnimals() {
+
+    return this.allAnimalsSource.value;
+
   }
 
   getAnimalGenders(){
+
+    
     const url = `${this.baseUrl}/getAnimalGenders`;
-    const updatedGenders =  this.genericHttpService.get<[]>(url);
-    updatedGenders.subscribe({
-      next: (updated) => this.animalsGenders.next(updated)
+
+
+    this.getData<[]>(url).subscribe((res) => {
+
+      if (res) {
+        this.setAnimalsGenders(res);
+      }
+
     });
-    return updatedGenders;
+
+
+
+  }
+
+  public setAnimalsGenders(animalsGenders: string[]) {
+
+    this.animalsGendersSource.next(animalsGenders);
+
+  }
+
+
+  public getAnimalsGenders() {
+
+    return this.animalsGendersSource.value;
+
   }
 
   public existGenders(){
-    if(this.animalsBreeds.value.length > 0){
+    if(this.animalsBreedsSource.value.length > 0){
       return true;
     }else{
       return false;
@@ -117,16 +187,36 @@ public currentAnimalId: Observable<number> = this.animalIdSource.asObservable();
   }
 
   getAnimalBreeds(){
+
     const url = `${this.baseUrl}/getAnimalBreeds`;
-    const updatedBreeds =  this.genericHttpService.get<[]>(url);
-    updatedBreeds.subscribe({
-      next: (updated) => this.animalsBreeds.next(updated)
+
+
+    this.getData<[]>(url).subscribe((res) => {
+
+      if (res) {
+        this.setAnimalsBreeds(res);
+      }
+
     });
-    return updatedBreeds;
+
+  }
+
+  
+  public setAnimalsBreeds(animalsBreeds: string[]) {
+
+    this.animalsBreedsSource.next(animalsBreeds);
+
+  }
+
+
+  public getAnimalsBreeds() {
+
+    return this.animalsBreedsSource.value;
+
   }
 
   public existBreeds(){
-    if(this.animalsBreeds.value.length > 0){
+    if(this.animalsBreedsSource.value.length > 0){
       return true;
     }else{
       return false;
@@ -138,16 +228,36 @@ public currentAnimalId: Observable<number> = this.animalIdSource.asObservable();
   }
 
   getAnimalTypes(){
+  
     const url = `${this.baseUrl}/getAnimalTypes`;
-    const updatedTypes =  this.genericHttpService.get<[]>(url);
-    updatedTypes.subscribe({
-      next: (updated) => this.animalsTypes.next(updated)
+
+
+    this.getData<[]>(url).subscribe((res) => {
+
+      if (res) {
+        this.setAnimalsTypes(res);
+      }
+
     });
-    return updatedTypes;
+  
   }
+
+  public setAnimalsTypes(animalsTypes: string[]) {
+
+    this.animalsTypesSource.next(animalsTypes);
+
+  }
+
+
+  public getAnimalsTypes() {
+
+    return this.animalsTypesSource.value;
+
+  }
+
   public exictTypes(){
 
-    if(this.animalsTypes.value.length > 0){
+    if(this.animalsTypesSource.value.length > 0){
       return true;
     }else{
       return false;

@@ -60,14 +60,20 @@ export class UploadFilesService {
   }
 
   DeleteUploadFile(fileId: number) {
+
     const url = `${this.baseUrl}/DeleteUploadFile`;
 
     const queryParams =  {fileId: fileId};
 
-    const updatedAnimals = this.genericHttpService.get<[]>(url, queryParams);
-    //.subscribe(data=>{data;})
-    updatedAnimals.subscribe();
-    return updatedAnimals;
+    this.getData<[]>(url, queryParams).subscribe((res) => {
+
+      if (res) {
+        //this.setDeleteSource(res);
+        console.info("fil har tagit bort")
+      }
+
+    });
+
   }
 
   getFiles(filesId: number) {
@@ -76,10 +82,37 @@ export class UploadFilesService {
 
     const queryParams =  {filesId: filesId};
 
-    const uploadfiles = this.genericHttpService.get<[]>(url, queryParams);
-    uploadfiles.subscribe({
-      next: (updated) => this.uploadFilesSource.next(updated)
+    this.getData<[]>(url, queryParams).subscribe((res) => {
+
+      if (res) {
+        this.setUploadFiles(res);
+      }
+
     });
-    return uploadfiles;
+
+
   }
+
+    /**
+   * Get data
+   */
+     public getData<T>(url: string, QueryParams: object = {}): Observable<any> {
+
+      return this.genericHttpService.get<T>(url, QueryParams);
+      
+    }
+
+    public setUploadFiles(uploadFiles: UploadFile[]) {
+
+      this.uploadFilesSource.next(uploadFiles);
+  
+    }
+  
+  
+    public getUploadFiles() {
+  
+      return this.uploadFilesSource.value;
+  
+    }
+
 }

@@ -23,7 +23,11 @@ export class LikeService {
 
   public getTotalLike(id: number, type: number) {
 
-    this.getTotalLikeHttp(id, type).subscribe((res) => {
+    const url = environment.getTotalLike;
+
+    const QueryParams = {id: id, type: type};
+
+    this.getData(url, QueryParams).subscribe((res) => {
 
       if (res) {
         this.setTotalLikeValue(res);
@@ -37,15 +41,12 @@ export class LikeService {
 
 
   /**
-   * Addd user to server
+   * Get data
    */
-  public getTotalLikeHttp(id: number, type: number): Observable<any> {
+  public getData(url: string, QueryParams: object): Observable<any> {
 
-    const url = environment.getTotalLike;
-
-    const parame = {id: id, type: type};
-
-    return this.genericHttpService.get<number>(url, parame);
+    return this.genericHttpService.get<number>(url, QueryParams);
+    
   }
 
 
