@@ -5,13 +5,14 @@
 
       <div class="card ">
         <div class="card-header">
-            <i class="far fa-thumbs-up"></i>
+            <i class="far fa-thumbs-up" (click)="like()"></i>
+            {{totalMapMarkeLikes}}
         </div>
         <div class="card-body">
-          <h5 class="card-title">{{MarkerInfo.Name}}</h5>
+          <h5 class="card-title">{{markerInfo.Name}}</h5>
 
           <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-          <p class="card-text">{{MarkerInfo.Description}}</p>
+          <p class="card-text">{{markerInfo.Description}}</p>
           <a href="#" class="btn btn-primary">Go somewhere</a>
         </div>
         <div class="card-footer text-muted">

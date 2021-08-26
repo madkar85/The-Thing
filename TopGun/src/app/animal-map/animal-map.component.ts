@@ -14,6 +14,8 @@ import { Overlay } from 'ol';
 import { MapService } from '../Service/map.service';
 import { MapMarker } from '../model/map-marker';
 import { NgForm } from '@angular/forms';
+import { LikeService } from '../Service/like.service';
+import { TypeOfLike } from '../model/type-of-like';
 
 @Component({
   selector: 'app-animal-map',
@@ -22,15 +24,16 @@ import { NgForm } from '@angular/forms';
 })
 export class AnimalMapComponent implements OnInit {
 
-  constructor(private mapService: MapService) { }
+  constructor(private mapService: MapService, private likeService: LikeService) { }
 
   @ViewChild('popup', { static: true }) popupElement: ElementRef;
   public map: Map;
   public vectorSource = new VectorSource();
   public vectorLayer = new VectorLayer();
   public markers: any;
-  public MarkerInfo = MapMarker.empty();
+  public markerInfo = MapMarker.empty();
   public showInfoBox = false;
+  public totalMapMarkeLikes: number;
 
   @ViewChild('mapForm', { static: false }) registerForm: NgForm;
 
@@ -54,6 +57,29 @@ export class AnimalMapComponent implements OnInit {
 
   
       });
+
+  }
+
+
+mapMarkeLike(id: number, type: number){
+
+   this.likeService.getTotalLike(id,type);
+
+    this.likeService.currentTotalLike.subscribe(totalLikeData => {
+      
+      if (totalLikeData != null) {
+        this.totalMapMarkeLikes = totalLikeData;
+
+      }
+
+    });
+
+}
+
+
+  like(){
+
+
 
   }
 
@@ -132,11 +158,13 @@ this.map.on('click', (evt) => {
     console.info("test");
     this.showInfoBox = true;
 
-    this.MarkerInfo.id = feature.get('id');
-    this.MarkerInfo.Name = feature.get('name');
-    this.MarkerInfo.Latitud = feature.get('Latitud');
-    this.MarkerInfo.Longitud = feature.get('Longitud');
-    this.MarkerInfo.Description = feature.get('description');
+    this.markerInfo.id = feature.get('id');
+    this.markerInfo.Name = feature.get('name');
+    this.markerInfo.Latitud = feature.get('Latitud');
+    this.markerInfo.Longitud = feature.get('Longitud');
+    this.markerInfo.Description = feature.get('description');
+
+    this.mapMarkeLike(feature.get('id'), TypeOfLike.MapMarker);
     
 
   } else {

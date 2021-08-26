@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -28,15 +28,40 @@ export class GenericHttpService {
   }
 
 
-  getBy<T>(url: string, item: T): Observable<T> {
+  get<T>(url: string, params: object = {}): Observable<T> {
 
-    return this.httpClient.get<T>(url, item);
+    let httQueryParams = this.addParamsToHttp(params);
+
+    return this.httpClient.get<T>(url,{params: httQueryParams});
+  }
+
+
+  addParamsToHttp(paramsList: any): HttpParams{
+
+    let params = new HttpParams();
+    console.log('loop param list');
+    for (let key in paramsList) {
+
+      params = params.append(key, paramsList[key]);
+
   }
   
-  getAll<T>(url: string): Observable<T> {
-
-    return this.httpClient.get<T>(url);
+  return params;
+  
   }
+
+  /*addParamsToHttp(paramsList: object): HttpParams{
+
+    let params = new HttpParams();
+
+    for (var product of products) {
+      console.log(product.product_desc)
+ }
+    params = params.append('var1', val1);
+    params = params.append('var2', val2);
+
+    return params;
+  }*/
 
   delete<T>(url: string, item: T) {
     return this.httpClient.delete(url, item);

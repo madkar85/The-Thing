@@ -34,10 +34,19 @@ namespace MiracleMileAPI.Controllers
         }
 
         [HttpGet("getMapMarkerLike")]
-        public int GetMapMarkerLike(MapMarker mapMarker)
+        public int GetMapMarkerLike(int id, int type)
         {
 
-            return mapCrud.GetMapMarkerLike(mapMarker.Id);
+            return mapCrud.GetMapMarkerLike(id, type);
+
+        }
+
+
+        [HttpGet("MapTest")]
+        public int MapTest()
+        {
+
+            return mapCrud.MapTest();
 
         }
 

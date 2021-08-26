@@ -10,7 +10,8 @@ export const environment = {
   update_user_url: 'https://localhost:44365/miraclemile/updateUser',
   get_user_url: 'https://localhost:44365/miraclemile/getUser',
   upload_files_url: 'https://localhost:44365/miraclemile/upload',
-  getMapMarkers: 'https://localhost:44365/miraclemile/getMapMarkers'
+  getMapMarkers: 'https://localhost:44365/miraclemile/getMapMarkers',
+  getTotalLike: 'https://localhost:44365/miraclemile/getMapMarkerLike',
 };
 
 /*

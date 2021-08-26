@@ -92,12 +92,14 @@ namespace MiracleMileAPI.Controllers
 
         /*--------------------------- Message code  ------------------------------------------*/
 
-        private  void AddAndRemoveMessageRoomLike(int Id, int myUser)
+        private  void AddAndRemoveMessageRoomLike(int Id, int myUser, int type)
         {
+
+            TypeOfLike typeOfLike = (TypeOfLike)type;
 
             var likeJsonData = GetJsonData<Like>("Like");
 
-            var like = likeJsonData.Where(u => u.Id == Id && u.UserId == myUser).First();
+            var like = likeJsonData.Where(u => u.Id == Id && u.UserId == myUser && u.Type == typeOfLike).First();
 
             if (String.IsNullOrEmpty(like.Id.ToString()))
             {
@@ -107,7 +109,8 @@ namespace MiracleMileAPI.Controllers
                 {
                     Id = randomId.Next(),
                     UserId = myUser,
-                    MessageRoomId = Id,
+                    ObjectId = Id,
+                    Type = typeOfLike,
                     Created = DateTime.Now,
                     Active = true,
 

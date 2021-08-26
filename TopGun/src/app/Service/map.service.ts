@@ -37,7 +37,7 @@ export class MapService {
 
     const url = environment.getMapMarkers;
 
-    return this.genericHttpService.getAll<MapMarker[]>(url);
+    return this.genericHttpService.get<MapMarker[]>(url);
   }
 
 

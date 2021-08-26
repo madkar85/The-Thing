@@ -66,8 +66,11 @@ public currentAnimalId: Observable<number> = this.animalIdSource.asObservable();
   //     next: (updated) => this.userSource.next(updated)
   //   });
   DeleteAnimal(AnimalId: number){
-    const url = `${this.baseUrl}/DeleteAnimal/${AnimalId}`;
-    const updatedAnimals =  this.genericHttpService.getBy(url, [])
+    const url = `${this.baseUrl}/DeleteAnimal`;
+
+    const queryParams =  {AnimalId: AnimalId};
+
+    const updatedAnimals =  this.genericHttpService.get<[]>(url, queryParams);
     updatedAnimals.subscribe({
       next: (updated) => this.animalsSource.next(updated)
     });
@@ -75,8 +78,12 @@ public currentAnimalId: Observable<number> = this.animalIdSource.asObservable();
   }
 
   getAnimales(ownerId: number){
-    const url = `${this.baseUrl}/GetAnimales/${ownerId}`;
-    const updatedAnimals =  this.genericHttpService.getBy(url, [])
+    //const url = `${this.baseUrl}/GetAnimales/${ownerId}`;
+    const url = `${this.baseUrl}/GetAnimales`;
+
+    const queryParams =  {ownerId: ownerId};
+
+    const updatedAnimals =  this.genericHttpService.get<[]>(url, queryParams);
     updatedAnimals.subscribe({
       next: (updated) => this.animalsSource.next(updated)
     });
@@ -85,7 +92,7 @@ public currentAnimalId: Observable<number> = this.animalIdSource.asObservable();
 
   getAllAnimales(){
     const url = `${this.baseUrl}/GetAllAnimales`;
-    const updatedAnimals =  this.genericHttpService.getBy(url, [])
+    const updatedAnimals =  this.genericHttpService.get<[]>(url);
     updatedAnimals.subscribe({
       next: (updated) => this.allAnimalsSource.next(updated)
     });
@@ -94,7 +101,7 @@ public currentAnimalId: Observable<number> = this.animalIdSource.asObservable();
 
   getAnimalGenders(){
     const url = `${this.baseUrl}/getAnimalGenders`;
-    const updatedGenders =  this.genericHttpService.getBy(url, [])
+    const updatedGenders =  this.genericHttpService.get<[]>(url);
     updatedGenders.subscribe({
       next: (updated) => this.animalsGenders.next(updated)
     });
@@ -111,7 +118,7 @@ public currentAnimalId: Observable<number> = this.animalIdSource.asObservable();
 
   getAnimalBreeds(){
     const url = `${this.baseUrl}/getAnimalBreeds`;
-    const updatedBreeds =  this.genericHttpService.getBy(url, [])
+    const updatedBreeds =  this.genericHttpService.get<[]>(url);
     updatedBreeds.subscribe({
       next: (updated) => this.animalsBreeds.next(updated)
     });
@@ -132,7 +139,7 @@ public currentAnimalId: Observable<number> = this.animalIdSource.asObservable();
 
   getAnimalTypes(){
     const url = `${this.baseUrl}/getAnimalTypes`;
-    const updatedTypes =  this.genericHttpService.getBy(url, [])
+    const updatedTypes =  this.genericHttpService.get<[]>(url);
     updatedTypes.subscribe({
       next: (updated) => this.animalsTypes.next(updated)
     });

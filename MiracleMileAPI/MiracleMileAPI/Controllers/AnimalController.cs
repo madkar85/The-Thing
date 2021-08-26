@@ -91,7 +91,7 @@ namespace MiracleMileAPI.Controllers
     }
    
     // GET: api/Animal/5
-    [HttpGet("GetAnimales/{ownerId}")]
+    [HttpGet("GetAnimales")]
         public IEnumerable<Animal> GetAnimales(int ownerId = 0)
         {
             

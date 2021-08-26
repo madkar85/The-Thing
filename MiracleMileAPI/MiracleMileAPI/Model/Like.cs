@@ -9,9 +9,8 @@ namespace MiracleMileAPI.Model
     {
         public int Id { get; set; }
         public int UserId { get; set; }
-        public int MessageRoomId { get; set; }
-        public int MessageId { get; set; }
-        public int MapMarkerId { get; set; }
+        public int ObjectId { get; set; }
+        public TypeOfLike Type { get; set; }
         public bool Active { get; set; }
         public DateTime Created { get; set; }
     }

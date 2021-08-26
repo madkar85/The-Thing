@@ -31,7 +31,7 @@ namespace MiracleMileAPI.Controllers
     }
 
     //// GET: api/UploadFiles
-    [HttpGet("files/{id}")]
+    [HttpGet("files")]
     public IEnumerable<UploadFile> GetFiles(int id)
     {
       //return new string[] { "value1", "value2" };
@@ -97,7 +97,7 @@ namespace MiracleMileAPI.Controllers
     }
 
     // DELETE: api/ApiWithActions/5
-    [HttpGet("DeleteUploadFile/{fileId}")]
+    [HttpGet("DeleteUploadFile")]
     public void DeleteUploadFile(int fileId = 0)
     {
       UploadFileCrud uploadFiles = new UploadFileCrud(_hostingEnvironment);

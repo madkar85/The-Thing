@@ -33,12 +33,32 @@ namespace MiracleMileAPI.Library
             return jsonObject;
         }
 
-        public int GetMapMarkerLike(int id)
+        public int GetMapMarkerLike(int id, int type)
         {
+
+            TypeOfLike typeOfLike = (TypeOfLike)type;
 
             List<Like> jsonObject = GetLikes();
 
-            var numberOfLike = jsonObject.FindAll(x => x.MapMarkerId == id).Count;
+            var numberOfLike = jsonObject.FindAll(x => x.ObjectId == id && x.Type == typeOfLike).Count;
+
+            return numberOfLike;
+        }
+
+
+
+        public int MapTest()
+        {
+            int id = 3;
+
+
+            int type = 2;
+
+            TypeOfLike typeOfLike = (TypeOfLike)type;
+
+            List<Like> jsonObject = GetLikes();
+
+            var numberOfLike = jsonObject.FindAll(x => x.ObjectId == id && x.Type == typeOfLike).Count;
 
             return numberOfLike;
         }
