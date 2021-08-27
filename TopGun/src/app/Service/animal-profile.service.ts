@@ -43,14 +43,21 @@ public currentAnimalId: Observable<number> = this.animalIdSource.asObservable();
   public currentGenders: Observable<string[]> = this.animalsGendersSource.asObservable();
 
   saveAnimalProfile(animal: Animal): Observable<Animal> {
-    const url = `${this.baseUrl}/SaveAnimal`;
-    const updatedAnimal = this.genericHttpService.post<Animal>(url, animal);
-
+    //const url = `${this.baseUrl}/SaveAnimal`;
+    //const updatedAnimal = this.genericHttpService.post<Animal>(url, animal);
 
     // when the result is returned from the server, update any listener to profile$.
     // updatedAnimal.subscribe({
     //   next: (updated) => this.animalSource.next(updated)
     // });
+
+
+    const url = `${this.baseUrl}/SaveAnimal`;
+
+    const queryParams =  {model: animal};
+
+    const updatedAnimal = this.postData<Animal>(url, queryParams);
+
     return updatedAnimal;
     
   }
@@ -81,6 +88,16 @@ public currentAnimalId: Observable<number> = this.animalIdSource.asObservable();
 
 
   }
+
+     /**
+   * post data.
+   */
+      public postData<T>(url: string, QueryParams: object = {}): Observable<any> {
+
+        return this.genericHttpService.post<T>(url, QueryParams);
+        
+      }
+  
 
   /**
    * Get data

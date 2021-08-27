@@ -42,12 +42,6 @@
       "Url": "C:\\angular\\The-Thing-master\\MiracleMileAPI\\MiracleMileAPI\\Resources\\Images\\Jellyfish.jpg"
     },
     {
-      "Id": "3247421",
-      "AnimalId": "0",
-      "Name": "Desert.jpg",
-      "Url": "C:\\angular\\The-Thing-master\\MiracleMileAPI\\MiracleMileAPI\\Resources\\Images\\Desert.jpg"
-    },
-    {
       "Id": "1833933",
       "AnimalId": "213520260",
       "Name": "Chrysanthemum.jpg",
@@ -58,6 +52,12 @@
       "AnimalId": "1935653987",
       "Name": "VisualCode - Copy.png",
       "Url": "C:\\angular\\The-Thing-master\\MiracleMileAPI\\MiracleMileAPI\\Resources\\Images\\VisualCode - Copy.png"
+    },
+    {
+      "Id": "3247421",
+      "AnimalId": "1935653987",
+      "Name": "Desert.jpg",
+      "Url": "C:\\angular\\The-Thing-master\\MiracleMileAPI\\MiracleMileAPI\\Resources\\Images\\Desert.jpg"
     }
   ]
 }

@@ -32,9 +32,15 @@ export class UploadFilesService {
 
 
   upload(uploadFile: UploadFile): Observable<UploadFile> {
-    const url = `${this.baseUrl}/SaveUpload`;
+    /*const url = `${this.baseUrl}/SaveUpload`;
     const updatedUploadFile = this.genericHttpService.post<UploadFile>(url, uploadFile);
+    return updatedUploadFile;*/
+
+    const url = `${this.baseUrl}/SaveUpload`;
+    const queryParams =  {model: uploadFile};
+    const updatedUploadFile = this.postData<UploadFile>(url, queryParams);
     return updatedUploadFile;
+
   }
 
   UploadTheFileToServer(file: File, filesId: number): Observable<HttpEvent<any>> {
@@ -78,20 +84,36 @@ export class UploadFilesService {
 
   getFiles(filesId: number) {
 
+
     const url = `${this.baseUrl}/files`;
 
-    const queryParams =  {filesId: filesId};
+    const queryParams =  {id: filesId};
 
-    this.getData<[]>(url, queryParams).subscribe((res) => {
+    /*this.getData<[]>(url, queryParams).subscribe((res) => {
 
       if (res) {
         this.setUploadFiles(res);
+        console.info('all files');
+        console.info(res);
       }
 
-    });
+    });*/
 
+return this.getData<[]>(url, queryParams);
 
   }
+
+
+   /**
+   * Put data
+   */
+    public postData<T>(url: string, QueryParams: object = {}): Observable<any> {
+
+      return this.genericHttpService.post<T>(url, QueryParams);
+      
+    }
+
+
 
     /**
    * Get data

@@ -64,17 +64,34 @@ export class AuthenticationService {
 
     const url = environment.refreshToken_url;
 
-    return this.genericHttpService.post<any>(url);
+    //return this.genericHttpService.post<any>(url);
+    return this.postData<any>(url);
+ 
   }
 
 
   public getAuthentication(logindata: Login): Observable<AuthToken> {
     console.info(logindata);
 
+    /*const url = environment.authenticate_url;
+
+    return this.genericHttpService.post<any>(url, logindata);*/
+
     const url = environment.authenticate_url;
 
-    return this.genericHttpService.post<any>(url, logindata);
+    const queryParams =  {model: logindata};
+
+    return this.postData<any>(url, queryParams);
   }
+
+   /**
+   * post data.
+   */
+    public postData<T>(url: string, QueryParams: object = {}): Observable<any> {
+
+      return this.genericHttpService.post<T>(url, QueryParams);
+      
+    }
 
   public parseJwt(token: any) {
     const base64Url = token.split('.')[1];

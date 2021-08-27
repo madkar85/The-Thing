@@ -23,7 +23,10 @@ export class UserService {
 
     const url = environment.register_url;
 
-    return this.genericHttpService.post<Register>(url, registerData);
+    const queryParams =  {model: registerData};
+
+    //return this.genericHttpService.post<Register>(url, queryParams);
+    return this.postData<Register>(url, queryParams);
   }
 
   public getCustomerUserProfile() {
@@ -46,8 +49,8 @@ export class UserService {
 
     const url = environment.get_user_url;
 
-    return this.genericHttpService.post<User>(url);
-
+    //return this.genericHttpService.post<User>(url);
+    return this.postData<User>(url);
   }
 
   /**
@@ -55,18 +58,39 @@ export class UserService {
    * result is also published in the Observable userSource. So if the client already subscribes the new User
    * data by subscribing to userSource, that client will be notified once this operation has succeeded.
    */
-  updateCustomerProfile(user: User): Observable<User> {
-    const url = environment.update_user_url;
-    const updatedUser = this.genericHttpService.post<User>(url, user);
+  updateCustomerProfile(user: User): any{
+    //const url = environment.update_user_url;
+    //const updatedUser = this.genericHttpService.post<User>(url, user);
 
     // when the result is returned from the server, update any listener to profile$.
-    updatedUser.subscribe({
+    /*updatedUser.subscribe({
       next: (updated) => this.userSource.next(updated)
+    });*/
+
+
+    const url = environment.update_user_url;
+
+    const queryParams =  {model: user};
+
+    const updatedUser = this.postData<User>(url, queryParams).subscribe((res) => {
+
+      if (res) {
+        this.setUser(res);
+      }
+
     });
 
     return updatedUser;
   }
 
+ /**
+   * post data.
+   */
+  public postData<T>(url: string, QueryParams: object = {}): Observable<any> {
+
+    return this.genericHttpService.post<T>(url, QueryParams);
+    
+  }
   /**
    * Set logged in user.
    */

@@ -54,9 +54,7 @@ export class UploadFilesComponent implements OnInit {
     if (this.enableUploadManyFiles && this.animalProfileService.existAnimalId()) {
 
       
-      this.uploadService.getFiles(Number(this.animalId));
-
-      this.uploadService.currentUploadFiles.subscribe(data => {
+      this.uploadService.getFiles(Number(this.animalId)).subscribe(data => {
         if (data) {
           this.fileInfos = data;
           this.uploadService.fileInfos = data;
